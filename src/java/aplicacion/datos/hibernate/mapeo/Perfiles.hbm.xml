@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="convento" name="aplicacion.modelo.dominio.Perfil" optimistic-lock="version" table="perfiles">
+    <id name="codigo" type="java.lang.Integer">
+      <column name="per_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="aplicacion.modelo.dominio.Usuario" fetch="join" name="usuario" cascade="all" >
+      <column name="per_usuario" not-null="true"/>
+    </many-to-one>
+    <property name="apellido" type="string">
+      <column length="50" name="per_apellidos" not-null="true"/>
+    </property>
+    <property name="nombre" type="string">
+      <column length="50" name="per_nombres" not-null="true"/>
+    </property>
+    <property name="dni" type="string">
+      <column length="8" name="per_dni" not-null="true"/>
+    </property>
+    <property name="fechaNac" type="date">
+      <column length="10" name="per_fecha_nac" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="80" name="per_email" not-null="true"/>
+    </property>
+    <property name="direccion" type="string">
+      <column length="100" name="per_direccion" not-null="true"/>
+    </property>
+    <property name="telefono" type="string">
+      <column length="12" name="per_telefono" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="reservases" table="reservas">
+      <key>
+        <column name="rev_perfil" not-null="true"/>
+      </key>
+      <one-to-many class="aplicacion.modelo.dominio.Reservas"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="prestamoses" table="prestamos">
+      <key>
+        <column name="pre_socio" not-null="true"/>
+      </key>
+      <one-to-many class="aplicacion.modelo.dominio.Prestamos"/>
+    </set>
+  </class>
+</hibernate-mapping>

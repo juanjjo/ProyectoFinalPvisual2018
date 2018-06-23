@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frmPub">
+                    <p:panel >
+                        <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuarios}">
+
+                            <p:column headerText="Nombre">  
+                                <p:outputLabel value="#{usuario.nombreUsuario}" />
+                            </p:column>
+
+                            <p:column headerText="tipo">  
+                                <p:outputLabel value="#{usuario.tipoUsuario}" />
+                            </p:column>
+
+                            <p:column headerText="Editar" >  
+                                <p:commandButton value="Editar Usuario" rendered="#{loginFormBean.renderAdmin}"
+                                                 actionListener="#{usuarioFormBean.seleccionarUsuario(usuario)}" update="frmdialogo,frmPub"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+                <h:form id="frmdialogo">
+                    <p:growl id="msj"/>
+                    <p:dialog id="dialog" header="Editar usuario" visible="#{usuarioFormBean.dialogo}"
+                              footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true" >
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Nombre: "/>
+                            <p:outputLabel value="#{usuarioFormBean.usuarioSeleccionado.nombreUsuario}"/>
+                            <p:outputLabel value="Estado" for="txtestado"/>
+                            <p:selectOneRadio id="txtestado" value="#{usuarioFormBean.usuarioSeleccionado.estado}" required="true">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneRadio>
+                                
+                            
+                    </h:panelGrid>
+                        <p:commandButton value="Guardar cambios" actionListener="#{usuarioFormBean.modificarUsuario()}" 
+                                         update="msj,frmdialogo"/>
+                   <p:commandButton value="Cancelar" actionListener="#{usuarioFormBean.ocultarDialogo()}"
+                                         update="frmdialogo"/>
+                    </p:dialog>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+
+</body>
+</html>

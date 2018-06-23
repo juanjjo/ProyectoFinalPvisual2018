@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+          <h:form id="frmperfil">
+                    
+                    <p:panelGrid columns="1">
+                        <p:outputLabel value=" Nombre :   #{loginFormBean.perfil.nombre}"/>
+                        <p:outputLabel value=" Apellido :  #{loginFormBean.perfil.apellido}"/>
+                        <p:outputLabel value=" Direccion :  #{loginFormBean.perfil.direccion}"/>
+                        <p:outputLabel value=" Fecha de nacimiento:  #{loginFormBean.perfil.fechaNac}">
+                            <f:convertDateTime type="date" />
+                        </p:outputLabel>
+                        <p:outputLabel value=" Email :  #{loginFormBean.perfil.email}"/>
+                        <p:outputLabel value=" Dni :  #{loginFormBean.perfil.dni}"/>
+                    </p:panelGrid> 
+                    <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.mostrarDialogo()}" update="frmdialogo" />
+                </h:form>
+                <h:form id="frmdialogo" >
+                    <p:growl id="mensaje" />
+                    <p:dialog header="Edicion de perfil" widgetVar="dialogo" visible="#{modificacionFormBean.dialogo}" 
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
+                            <p:inputText id="txtnombre" value="#{loginFormBean.perfil.nombre}"
+                                         required="true" validatorMessage="Nombre incorrecto">
+                                <f:validateLength maximum="12" />
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblapellido" value="Apellido" for="txtapellido"/>
+                            <p:inputText id="txtapellido" value="#{loginFormBean.perfil.apellido}" validatorMessage="Apellido incorrecto"
+                                         required="true">
+                            <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblemail" value="E-Mail" for="txtemail"/>
+                            <p:inputText id="txtemail" value="#{loginFormBean.perfil.email}" validatorMessage="Correo incorrecto" required="true">
+                            <f:validateRegex  pattern="[a-zA-Z0-9 ]+@[a-zA-Z]+.com" />
+                            </p:inputText>
+                            <p:outputLabel id="lbldireccion" value="Direccion" for="txtdireccion"/>
+                            <p:inputText id="txtdireccion" value="#{loginFormBean.perfil.direccion}" validatorMessage="Direccion incorrecta" required="true">
+                                <f:validateLength maximum="15"/>
+                            </p:inputText>
+                            <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
+                            <p:inputText id="txttelefono" value="#{loginFormBean.perfil.telefono}" validatorMessage="Telefono incorrecto" required="true">
+                                <f:validateRegex  pattern="[0-9]+$" />
+                            </p:inputText>
+                            <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
+                               
+                            <p:inputText id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" required="true">
+                             <f:convertDateTime type="date"/>
+                            </p:inputText>
+                            <p:commandButton value="Guardar cambios" 
+                                             actionListener="#{modificacionFormBean.modificarPerfil()}" update="mensaje,frmdialogo,frmperfil" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

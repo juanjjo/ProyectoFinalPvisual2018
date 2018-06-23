@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+        <f:event type="preRenderView" listener="#{loginFormBean.renderizar()}" />
+      
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+              <h:form>  
+                <p:growl id="messages"/>
+
+                <p:menubar>
+                    <p:menuitem value="home" outcome="Home" />
+                    <p:submenu label="Publicaciones" icon="">
+                        <p:menuitem value="Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderFinal}" outcome="Libros"/>
+                        <p:menuitem value="Editar Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderAdmin}" outcome="Libros"/>
+                    </p:submenu>
+                        <p:submenu label="Reservas">
+                            <p:menuitem value="Mis reservas" rendered="#{loginFormBean.renderFinal}"/>
+                            <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}"/>
+                     </p:submenu>
+                     <p:submenu label="Autores y Editoriales">
+                         <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
+                         <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>
+                            <p:menuitem value="Ver y Editar Autores" rendered="#{loginFormBean.renderAdmin}" outcome="Autores.xhtml"/>
+                            <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
+                     </p:submenu>
+                    
+                    <p:submenu label="Empleados"  rendered="#{loginFormBean.renderSuper}">
+                        <p:menuitem value="Ver y Editar" outcome="Administradores.xhtml"  />                        
+                    </p:submenu>
+                     <p:submenu label="Socios"  rendered="#{loginFormBean.renderSuper}">
+                         <p:menuitem value="Ver y Editar"  outcome="Usuarios.xhtml" />                        
+                    </p:submenu>
+
+                    <f:facet name="options">
+                        <h:panelGrid columns="5">
+                            <p:inputText value="#{publicacionFormBean.buscar}" placeholder="Buscar por Titulo o Editorial" size="30"/>
+                            <p:commandButton icon="ui-icon-search" style="margin-right:25px" 
+                                             actionListener="#{publicacionFormBean.buscarLibro()}" update="messages" />                           
+
+                            <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}" style="margin-right:20px"/>
+                            <p:commandButton value="Perfil" action="Perfiles"  />
+                        <p:commandButton value="salir" icon="ui-icon-extlink" actionListener="#{loginFormBean.cerrarSesion()}" />
+                        </h:panelGrid>
+                    </f:facet>
+
+                </p:menubar>
+            </h:form>
+            <ui:insert name="top"></ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            
+           
+            <ui:insert name="content"></ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

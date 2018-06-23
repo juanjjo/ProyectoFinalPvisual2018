@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frmPub">
+                    <p:panel >
+                        <p:dataTable id="tblp" var="pub" value="#{publicacionFormBean.publicaciones}">
+                            <p:column headerText="Editorial">  
+                                <p:outputLabel value="#{pub.editorial.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Nombre">  
+                                <p:outputLabel value="#{pub.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Resumen">  
+                                <p:outputLabel value="#{pub.resumen}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo">  
+                                <p:outputLabel value="#{pub.tipo}" />
+                            </p:column>
+
+                            <p:column headerText="Resumen">  
+                                <p:outputLabel value="#{pub.resumen}" />
+                            </p:column>
+
+                            <p:column headerText="Estado">  
+                                <p:outputLabel value="#{pub.estado}" />
+                            </p:column>
+
+                            <p:column headerText="Stock" style="width: 30px">  
+                                <p:outputLabel value="#{pub.stock}" />
+                            </p:column>
+
+
+                            <p:column headerText="Reservas" rendered="#{loginFormBean.renderFinal}">  
+                                <p:commandButton value="Reservar Libros" />
+                            </p:column>
+                            <p:column headerText="Editar" rendered="#{loginFormBean.renderAdmin}">  
+                                <p:commandButton value="Editar libro" actionListener="#{publicacionFormBean.seleccionarLibro(pub)}"
+                                                 update="frmdialogo2"  />
+                            </p:column>
+
+                        </p:dataTable>
+                        
+                    </p:panel>
+                    <p:commandButton value="Nuevo libro" rendered="#{loginFormBean.renderAdmin}" 
+                                     actionListener="#{publicacionFormBean.mostrarDialogo()}" update="frmdialogo"/>
+                </h:form>
+                <h:form id="frmdialogo" >
+                    <p:growl id="mensaje" />
+                    <p:dialog id="di" header="Nuevo libro" widgetVar="dialogo"  visible="#{publicacionFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
+                        <h:panelGrid columns="3">
+                             <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
+                             <p:inputText id="txtcodigo" value="#{publicacionFormBean.publicacion.codigo}"
+                                          required="true"/>
+                             <p:outputLabel/>
+                            <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
+                            <p:inputText id="txttitulo" value="#{publicacionFormBean.publicacion.nombre}"
+                                         required="true" validatorMessage="Titulo incorrecto">
+                                
+                                <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                             <p:outputLabel/>
+                            <p:outputLabel value="Autor"/>
+                            <p:selectOneMenu value="#{publicacionFormBean.autor}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems  value="#{autorFormBean.autores}" var="autor"
+                                                itemLabel="#{autor.nombre} #{autor.apellido}" itemValue="#{autor}"/>
+                            </p:selectOneMenu>
+                            <p:button value="Nuevo autor" outcome="Autores.xhtml"/>
+                            <p:outputLabel value="Editorial"/>
+                            <p:selectOneMenu  value="#{publicacionFormBean.editorial}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{editorialFormBean.editoriales}" var="editorial"
+                                               itemLabel="#{editorial.nombre}" itemValue="#{editorial}" />
+                            </p:selectOneMenu>
+                            <p:button value="Nueva Editoral" outcome="Editoriales.xhtml"/>
+                            <p:outputLabel id="lblresumen" value="Resumen" for="txtresumen"/>
+                            <p:inputText id="txtresumen" value="#{publicacionFormBean.publicacion.resumen}" validatorMessage="Resumen incorrecto"
+                                         required="true">
+                            <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel />
+                            <p:outputLabel id="lbltipo" value="Tipo" for="txttipo"/>
+                            <p:inputText id="txttipo" value="#{publicacionFormBean.publicacion.tipo}" validatorMessage="Tipo incorrecto" required="true">
+                            </p:inputText>
+                            <p:outputLabel />
+                            <p:outputLabel id="lblstock" value="Stock" for="txtstock" />
+                            <p:inputNumber id="txtstock" value="#{publicacionFormBean.publicacion.stock}" 
+                                                          required="true" decimalPlaces="0"/>
+                              <p:outputLabel />
+                            <p:commandButton value="Agregar"  actionListener="#{publicacionFormBean.altaDePublicacion()}"
+                                             update="frmPub,mensaje,di"/>
+                        </h:panelGrid>
+                    </p:dialog>
+                   </h:form>
+                <h:form id="frmdialogo2" >
+                    <p:growl id="mensaje2" />
+                    <p:dialog id="di2" header="Editar" widgetVar="dialogo"  visible="#{publicacionFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
+                        <h:panelGrid columns="2">
+                             <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
+                             <p:inputText id="txtcodigo" value="#{publicacionFormBean.libroSeleccionado.codigo}"
+                                          required="true" disabled="true"/>
+                            <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
+                            <p:inputText id="txttitulo" value="#{publicacionFormBean.libroSeleccionado.nombre}"
+                                         required="true" validatorMessage="Nombre incorrecto">
+                               <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblestado" value="Estado" for="txtestado"/>
+                            <p:selectOneRadio id="txtestado" value="#{publicacionFormBean.libroSeleccionado.estado}" required="true">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneRadio>
+                            <p:outputLabel value="Editorial"/>
+                            <p:selectOneMenu  value="#{publicacionFormBean.libroSeleccionado.editorial}" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{editorialFormBean.editoriales}" var="editorial"
+                                               itemLabel="#{editorial.nombre}" itemValue="#{editorial}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel id="lblresumen" value="Resumen" for="txtresumen"/>
+                            <p:inputText id="txtresumen" value="#{publicacionFormBean.libroSeleccionado.resumen}" validatorMessage="Resumen solo debe contener letras y numeros"
+                                         required="true">
+                            <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lbltipo" value="Tipo" for="txttipo"/>
+                            <p:inputText id="txttipo" value="#{publicacionFormBean.libroSeleccionado.tipo}" validatorMessage="Tipo incorrecto" required="true">
+                             <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblstock" value="Stock" for="txtstock" />
+                            <p:inputNumber id="txtstock" value="#{publicacionFormBean.libroSeleccionado.stock}" 
+                                                          required="true" decimalPlaces="0"/>
+                            <p:commandButton value="Guardar cambios"  actionListener="#{publicacionFormBean.modificarLibro()}"
+                                             update="frmPub,mensaje2,di2" />
+                        </h:panelGrid>
+                    </p:dialog>
+                   </h:form>
+                 
+                
+                                  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
