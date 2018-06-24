@@ -15,6 +15,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import aplicacion.modelo.dominio.Perfil;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -69,7 +70,7 @@ public class UsuarioBean implements Serializable {
      * inicio
      *
      */
-    public void cerrarSesion() {
+    public void cerrarSesion() throws IOException {
         p.cerrarSesion();
     }
 

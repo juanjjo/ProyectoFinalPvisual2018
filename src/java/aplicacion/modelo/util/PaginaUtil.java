@@ -5,7 +5,9 @@
  */
 package aplicacion.modelo.util;
 
+import aplicacion.modelo.dominio.Perfil;
 import aplicacion.modelo.dominio.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,15 +22,17 @@ public class PaginaUtil implements Serializable{
   /**
    * Guarda el usuario como nulo (deslogueado) y redirecciona a la pagina de inicio
    **/
-    public void cerrarSesion(){
-        try{
+    public void cerrarSesion() throws IOException{
+        Perfil perfil = null;
     Usuario usu=null;
+    
+    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("perfil", perfil);
      FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usu", usu);
      FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
     
-        }catch(Exception e){
+       
         
-    }
+    
 }
     public boolean renderizarPaginaFinal(){
  boolean bool=false;

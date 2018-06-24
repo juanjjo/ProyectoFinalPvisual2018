@@ -32,10 +32,12 @@ public class LoginFormBean implements Serializable {
     private boolean renderFinal;
     private boolean renderAdmin;
     private boolean renderSuper;
+    public boolean dialogo=false;
 
     public LoginFormBean() {
 
     }
+     
 
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;
@@ -85,6 +87,15 @@ public class LoginFormBean implements Serializable {
         this.renderSuper = renderSuper;
     }
 
+    public boolean isDialogo() {
+        return dialogo;
+    }
+
+    public void setDialogo(boolean dialogo) {
+        this.dialogo = dialogo;
+    }
+    
+
     public void valiadrUsuario() throws IOException {
         Usuario usuario = usuarioBean.validarUsuario(nombreUsuario, password);
         if (usuario != null) {
@@ -108,7 +119,7 @@ public class LoginFormBean implements Serializable {
         return (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
     }
 
-    public void cerrarSesion() {
+    public void cerrarSesion() throws IOException {
         usuarioBean.cerrarSesion();
     }
 
@@ -138,7 +149,22 @@ public class LoginFormBean implements Serializable {
 
             FacesContext.getCurrentInstance().getExternalContext().redirect("Pagina sin usuario.xhtml"); 
         }
-     
-
     }
+    public void mostrarDialogo(){
+    this.dialogo=true;
+        
+    }
+    public void ocultarDialogo(){
+    this.dialogo=false;
+    }
+    
+  
+    
+   @PostConstruct
+   public void init(){
+    Usuario usu = usuarioBean.validarSesion();
+        if (usu != null) {
+            mostrarDialogo();
+        }else{ocultarDialogo();}
+   }
 }

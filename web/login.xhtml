@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./Estructura/newTemplate.xhtml">
-
+           
             <ui:define name="content">
 <h:form id="frmlogin">
                     <p:growl id="msjgeneral" showDetail="false" sticky="false"/>
@@ -29,10 +30,19 @@
                                 <p:outputLabel value="No tenes cuenta?"/>
                                 <p:link value=" Crear cuenta" outcome="AltaFinal.xhtml" />
                             </h:panelGrid>
-                                
-                        
                     </p:panel> 
-                    
+                </h:form>
+                <h:form>
+                    <p:dialog header="Sesion abierta" visible="#{loginFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Usted ya tiene una sesion iniciada como : "/>
+                            <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
+                            <p:button value="Ingresar" outcome="Home.xhtml"/> 
+                            <p:commandButton value="Cerrar sesion" icon="ui-icon-extlink" 
+                                             actionListener="#{loginFormBean.cerrarSesion()}"/>
+                        </h:panelGrid>
+                    </p:dialog>
                 </h:form>
             </ui:define>
 
