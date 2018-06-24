@@ -2,21 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="convento" name="aplicacion.modelo.dominio.DetallesReservas" optimistic-lock="version" table="detalles_reservas">
-    <id name="drevCodigo" type="java.lang.Integer">
+  <class catalog="convento" name="aplicacion.modelo.dominio.DetalleReserva" optimistic-lock="version" table="detalles_reservas">
+    <id name="codigo" type="java.lang.Integer">
       <column name="drev_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicaciones">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicacion">
       <column length="15" name="drev_publicacion" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Reservas" fetch="select" name="reservas">
+    <many-to-one class="aplicacion.modelo.dominio.Reserva" fetch="select" name="reserva">
       <column name="drev_reserva" not-null="true"/>
     </many-to-one>
-    <property name="drevCantidad" type="int">
+    <property name="cantidad" type="int">
       <column name="drev_cantidad" not-null="true"/>
     </property>
-    <property name="drevEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="drev_estado" not-null="true"/>
     </property>
   </class>

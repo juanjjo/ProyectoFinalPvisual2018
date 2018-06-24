@@ -2,28 +2,28 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="convento" name="aplicacion.modelo.dominio.Reservas" optimistic-lock="version" table="reservas">
-    <id name="revCodigo" type="java.lang.Integer">
+  <class catalog="convento" name="aplicacion.modelo.dominio.Reserva" optimistic-lock="version" table="reservas">
+    <id name="codigo" type="java.lang.Integer">
       <column name="rev_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfiles">
+    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfil">
       <column name="rev_perfil" not-null="true"/>
     </many-to-one>
-    <property name="revFechaEmision" type="date">
+    <property name="fechaEmision" type="date">
       <column length="10" name="rev_fecha_emision" not-null="true"/>
     </property>
-    <property name="revFechaTurno" type="date">
+    <property name="fechaTurno" type="date">
       <column length="10" name="rev_fecha_turno" not-null="true"/>
     </property>
-    <property name="revEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="rev_estado" not-null="true"/>
     </property>
     <set fetch="select" inverse="true" lazy="true" name="detallesReservases" table="detalles_reservas">
       <key>
         <column name="drev_reserva" not-null="true"/>
       </key>
-      <one-to-many class="aplicacion.modelo.dominio.DetallesReservas"/>
+      <one-to-many class="aplicacion.modelo.dominio.DetalleReserva"/>
     </set>
   </class>
 </hibernate-mapping>

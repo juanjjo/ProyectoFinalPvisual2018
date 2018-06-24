@@ -7,7 +7,7 @@
       <column name="per_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Usuario" fetch="join" name="usuario" cascade="all" >
+    <many-to-one cascade="all" class="aplicacion.modelo.dominio.Usuario" fetch="join" name="usuario">
       <column name="per_usuario" not-null="true"/>
     </many-to-one>
     <property name="apellido" type="string">
@@ -35,7 +35,7 @@
       <key>
         <column name="rev_perfil" not-null="true"/>
       </key>
-      <one-to-many class="aplicacion.modelo.dominio.Reservas"/>
+      <one-to-many class="aplicacion.modelo.dominio.Reserva"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="prestamoses" table="prestamos">
       <key>

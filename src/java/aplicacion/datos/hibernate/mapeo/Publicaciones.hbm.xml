@@ -3,11 +3,11 @@
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="convento" name="aplicacion.modelo.dominio.Publicacion" optimistic-lock="version" table="publicaciones">
-    <id name="codigo" type="string" >
-      <column length="15" name="pub_codigo" />
+    <id name="codigo" type="string">
+      <column length="15" name="pub_codigo"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Editorial" fetch="join" name="editorial" cascade="all">
+    <many-to-one cascade="all" class="aplicacion.modelo.dominio.Editorial" fetch="join" name="editorial">
       <column name="pub_editorial" not-null="true"/>
     </many-to-one>
     <property name="nombre" type="string">
@@ -31,7 +31,7 @@
       <key>
         <column length="15" name="drev_publicacion" not-null="true"/>
       </key>
-      <one-to-many class="aplicacion.modelo.dominio.DetallesReservas"/>
+      <one-to-many class="aplicacion.modelo.dominio.DetalleReserva"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="pubClas" table="pub_cla">
       <key>

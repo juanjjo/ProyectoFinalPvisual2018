@@ -34,7 +34,7 @@
                                 <p:outputLabel value="#{pub.resumen}" />
                             </p:column>
 
-                            <p:column headerText="Estado">  
+                            <p:column headerText="Estado" rendered="#{loginFormBean.renderSuper}">   
                                 <p:outputLabel value="#{pub.estado}" />
                             </p:column>
 
@@ -44,7 +44,8 @@
 
 
                             <p:column headerText="Reservas" rendered="#{loginFormBean.renderFinal}">  
-                                <p:commandButton value="Reservar Libros" />
+                                <p:commandButton value="Reservar Libro" 
+                             actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserva"/>
                             </p:column>
                             <p:column headerText="Editar" rendered="#{loginFormBean.renderAdmin}">  
                                 <p:commandButton value="Editar libro" actionListener="#{publicacionFormBean.seleccionarLibro(pub)}"
@@ -145,6 +146,33 @@
                     </p:dialog>
                    </h:form>
                  
+                <h:form id="frmDialogoReserva">
+                    <p:growl id="msj" />
+                    <p:dialog header="Nueva reserva" visible="#{reservaFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
+                               footer="Biblioteca San Francisco-Programacion visual 2018">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Nombre :"/>
+                            <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.nombre}"/>
+                             <p:outputLabel value="Editorial :"/>
+                             <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.editorial.nombre}"/>
+                         <p:outputLabel value="Usuario :" />
+                         <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
+                          <p:outputLabel value="Fecha de emision de la reserva :"/>
+                          <p:outputLabel value="#{reservaFormBean.reserva.fechaEmision}">
+                              <f:convertDateTime type="date"/>
+                          </p:outputLabel>
+                          <p:outputLabel id="lblfechaturno" value="Fecha de turno" for="txtfechaturno" />
+                          <p:inputText id="txtfechaturno" value="#{reservaFormBean.reserva.fechaTurno}" required="true">
+                           <f:convertDateTime type="date" /> 
+                           </p:inputText>
+                          <p:outputLabel id="lblcantidad" value="Cantidad" for="txtcantidad"/>
+                          <p:inputNumber id="txtcantidad" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
+                                         required="true"/>
+                            <p:commandButton value="Reservar" actionListener="#{reservaFormBean.nuevaReserva()}"
+                                             update="frmDialogoReserva,msj"/>
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
                 
                                   
             </ui:define>
