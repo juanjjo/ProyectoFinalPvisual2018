@@ -28,7 +28,7 @@
                 <h:form id="frmdialogo" >
                     <p:growl id="mensaje" />
                     <p:dialog header="Edicion de perfil" widgetVar="dialogo" visible="#{modificacionFormBean.dialogo}" 
-                              footer="Biblioteca San Francisco-Programacion visual 2018">
+                              footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true">
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
                             <p:inputText id="txtnombre" value="#{loginFormBean.perfil.nombre}"
@@ -43,11 +43,12 @@
                             </p:inputText>
                             <p:outputLabel id="lblemail" value="E-Mail" for="txtemail"/>
                             <p:inputText id="txtemail" value="#{loginFormBean.perfil.email}" validatorMessage="Correo incorrecto" required="true">
-                            <f:validateRegex  pattern="[a-zA-Z0-9 ]+@[a-zA-Z]+.com" />
+                            <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
                             </p:inputText>
                             <p:outputLabel id="lbldireccion" value="Direccion" for="txtdireccion"/>
                             <p:inputText id="txtdireccion" value="#{loginFormBean.perfil.direccion}" validatorMessage="Direccion incorrecta" required="true">
-                                <f:validateLength maximum="15"/>
+                                 <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
+                                <f:validateLength maximum="25"/>
                             </p:inputText>
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
                             <p:inputText id="txttelefono" value="#{loginFormBean.perfil.telefono}" validatorMessage="Telefono incorrecto" required="true">
