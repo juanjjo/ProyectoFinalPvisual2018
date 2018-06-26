@@ -7,12 +7,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
-
             <ui:define name="content">
-          <h:form id="frmperfil">
-                    
+                <h:form id="frmperfil">
                     <p:panelGrid columns="1">
                         <p:outputLabel value=" Nombre :   #{loginFormBean.perfil.nombre}"/>
                         <p:outputLabel value=" Apellido :  #{loginFormBean.perfil.apellido}"/>
@@ -39,15 +36,15 @@
                             <p:outputLabel id="lblapellido" value="Apellido" for="txtapellido"/>
                             <p:inputText id="txtapellido" value="#{loginFormBean.perfil.apellido}" validatorMessage="Apellido incorrecto"
                                          required="true">
-                            <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblemail" value="E-Mail" for="txtemail"/>
                             <p:inputText id="txtemail" value="#{loginFormBean.perfil.email}" validatorMessage="Correo incorrecto" required="true">
-                            <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
+                                <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
                             </p:inputText>
                             <p:outputLabel id="lbldireccion" value="Direccion" for="txtdireccion"/>
                             <p:inputText id="txtdireccion" value="#{loginFormBean.perfil.direccion}" validatorMessage="Direccion incorrecta" required="true">
-                                 <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
+                                <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                                 <f:validateLength maximum="25"/>
                             </p:inputText>
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
@@ -55,18 +52,14 @@
                                 <f:validateRegex  pattern="[0-9]+$" />
                             </p:inputText>
                             <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
-                               
-                            <p:inputText id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" required="true">
-                             <f:convertDateTime type="date"/>
-                            </p:inputText>
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" />
+                   
                             <p:commandButton value="Guardar cambios" 
                                              actionListener="#{modificacionFormBean.modificarPerfil()}" update="mensaje,frmdialogo,frmperfil" />
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
