@@ -10,15 +10,27 @@
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
             <ui:define name="content">
                 <h:form id="frmperfil">
-                    <p:panelGrid columns="1">
-                        <p:outputLabel value=" Nombre :   #{loginFormBean.perfil.nombre}"/>
-                        <p:outputLabel value=" Apellido :  #{loginFormBean.perfil.apellido}"/>
-                        <p:outputLabel value=" Direccion :  #{loginFormBean.perfil.direccion}"/>
-                        <p:outputLabel value=" Fecha de nacimiento:  #{loginFormBean.perfil.fechaNac}">
-                            <f:convertDateTime type="date" />
-                        </p:outputLabel>
-                        <p:outputLabel value=" Email :  #{loginFormBean.perfil.email}"/>
-                        <p:outputLabel value=" Dni :  #{loginFormBean.perfil.dni}"/>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre : "/>
+                        <h:outputText value="#{loginFormBean.perfil.nombre}">
+                        </h:outputText>
+                        <p:outputLabel value=" Apellido : "/>
+                        <h:outputText value="#{loginFormBean.perfil.apellido}">
+                        </h:outputText>
+                        <p:outputLabel value="Direccion : "/>
+                        <h:outputText value="#{loginFormBean.perfil.direccion}">
+                        </h:outputText>                        
+                        <p:outputLabel value=" Fecha de nacimiento: "/>
+                        <h:outputText value="#{loginFormBean.perfil.fechaNac}">
+                            <f:convertDateTime pattern="MM-dd-yyyy" />
+                        </h:outputText>
+                        <p:outputLabel value="Email : "/>
+                        <h:outputText value="#{loginFormBean.perfil.email}">
+                        </h:outputText> 
+                        <p:outputLabel value="Dni :  "/>
+                        <h:outputText value="#{loginFormBean.perfil.dni}">
+                        </h:outputText> 
+                        
                     </p:panelGrid> 
                     <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.mostrarDialogo()}" update="frmdialogo" />
                 </h:form>
@@ -53,7 +65,7 @@
                             </p:inputText>
                             <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
                             <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" />
-                   
+
                             <p:commandButton value="Guardar cambios" 
                                              actionListener="#{modificacionFormBean.modificarPerfil()}" update="mensaje,frmdialogo,frmperfil" />
                         </h:panelGrid>
