@@ -12,66 +12,53 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Facelets Template</title>
         <f:event type="preRenderView" listener="#{loginFormBean.renderizar()}" />
-      
+
     </h:head>
-
     <h:body>
-
         <div id="top">
-              <h:form>  
+            <h:form>  
                 <p:growl id="messages"/>
-
                 <p:menubar>
                     <p:menuitem value="home" outcome="Home" />
                     <p:submenu label="Publicaciones" icon="">
                         <p:menuitem value="Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderFinal}" outcome="Libros"/>
                         <p:menuitem value="Editar Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderAdmin}" outcome="Libros"/>
                     </p:submenu>
-                        <p:submenu label="Reservas">
-                            <p:menuitem value="Mis reservas" rendered="#{loginFormBean.renderFinal}"/>
-                            <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}"/>
-                     </p:submenu>
-                     <p:submenu label="Autores y Editoriales">
-                         <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
-                         <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>
-                            <p:menuitem value="Ver y Editar Autores" rendered="#{loginFormBean.renderAdmin}" outcome="Autores.xhtml"/>
-                            <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
-                     </p:submenu>
-                    
+                    <p:submenu label="Reservas">
+                        <p:menuitem value="Mis reservas" rendered="#{loginFormBean.renderFinal}"/>
+                        <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}"/>
+                    </p:submenu>
+                    <p:submenu label="Autores y Editoriales">
+                        <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
+                        <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>
+                        <p:menuitem value="Ver y Editar Autores" rendered="#{loginFormBean.renderAdmin}" outcome="Autores.xhtml"/>
+                        <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
+                    </p:submenu>
                     <p:submenu label="Empleados"  rendered="#{loginFormBean.renderSuper}">
                         <p:menuitem value="Ver y Editar" outcome="Administradores.xhtml"  />                        
                     </p:submenu>
-                     <p:submenu label="Socios"  rendered="#{loginFormBean.renderSuper}">
-                         <p:menuitem value="Ver y Editar"  outcome="Usuarios.xhtml" />                        
+                    <p:submenu label="Socios"  rendered="#{loginFormBean.renderSuper}">
+                        <p:menuitem value="Ver y Editar"  outcome="Usuarios.xhtml" />                        
                     </p:submenu>
-
                     <f:facet name="options">
                         <h:panelGrid columns="5">
                             <p:inputText value="#{publicacionFormBean.buscar}" placeholder="Buscar por Titulo o Editorial" size="30"/>
                             <p:commandButton icon="ui-icon-search" style="margin-right:25px" 
                                              actionListener="#{publicacionFormBean.buscarLibro()}" update="messages" />                           
-
                             <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}" style="margin-right:20px"/>
                             <p:commandButton value="Perfil" action="Perfiles"  />
-                        <p:commandButton value="salir" icon="ui-icon-extlink" actionListener="#{loginFormBean.cerrarSesion()}" />
+                            <p:commandButton value="salir" icon="ui-icon-extlink" actionListener="#{loginFormBean.cerrarSesion()}" />
                         </h:panelGrid>
                     </f:facet>
-
                 </p:menubar>
             </h:form>
             <ui:insert name="top"></ui:insert>
         </div>
-
         <div id="content" class="center_content">
-            
-           
             <ui:insert name="content"></ui:insert>
         </div>
-
         <div id="bottom">
             <ui:insert name="bottom">Bottom</ui:insert>
         </div>
-
     </h:body>
-
 </html>

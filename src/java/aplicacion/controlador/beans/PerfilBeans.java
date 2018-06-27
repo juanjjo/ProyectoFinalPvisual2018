@@ -12,24 +12,24 @@ import aplicacion.modelo.dominio.Perfil;
 import aplicacion.modelo.util.PaginaUtil;
 import java.io.Serializable;
 import javax.faces.bean.ViewScoped;
+
 /**
  *
  * @author Gabriel
  */
 @ManagedBean
 @ViewScoped
-public class PerfilBeans implements Serializable{
-    private  Usuario usuario;
+public class PerfilBeans implements Serializable {
+
+    private Usuario usuario;
     private Perfil perfil;
     private PaginaUtil p;
-   
 
     /**
      * Creates a new instance of PerfilBeans
      */
     public PerfilBeans() {
-      
-       
+
     }
 
     public Usuario getUsuario() {
@@ -56,17 +56,14 @@ public class PerfilBeans implements Serializable{
         this.p = p;
     }
 
-
-
-  
-    
-    public void agregarPerfil(Perfil perfil){
-        PerfilDAOImp perfildao =new PerfilDAOImp();
+    public void agregarPerfil(Perfil perfil) {
+        PerfilDAOImp perfildao = new PerfilDAOImp();
         perfildao.agregar(perfil);
     }
-public void modificarPerfil (Perfil perfil){
-PerfilDAOImp perfildao =new PerfilDAOImp();
-perfildao.modificar(perfil);
 
-}
+    public void modificarPerfil(Perfil perfil) {
+        PerfilDAOImp perfildao = new PerfilDAOImp();
+        perfildao.modificar(perfil);
+
+    }
 }

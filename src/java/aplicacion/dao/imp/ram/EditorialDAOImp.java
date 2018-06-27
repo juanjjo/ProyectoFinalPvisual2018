@@ -21,11 +21,11 @@ import org.hibernate.criterion.Order;
  *
  * @author Gabriel.Y
  */
-public class EditorialDAOImp implements IEditorialDAO{
+public class EditorialDAOImp implements IEditorialDAO {
 
     @Override
     public List<Editorial> editoriales() {
- List<Editorial> listaEditoriales = new ArrayList<>();
+        List<Editorial> listaEditoriales = new ArrayList<>();
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         //trae de la base datos todos los usuari final nada mas
@@ -34,30 +34,30 @@ public class EditorialDAOImp implements IEditorialDAO{
 
         session.flush();//actuliseme ese opjeto de la base de dato
         session.close();
-    return listaEditoriales;
+        return listaEditoriales;
     }
 
     @Override
     public void agregarEditorial(Editorial e) {
-Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.save(e);
-    session.getTransaction().commit();
-    session.close();
-  FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Editorial Agregada con exito" ,"Editorial Agregada con exito");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-        }
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(e);
+        session.getTransaction().commit();
+        session.close();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Editorial Agregada con exito", "Editorial Agregada con exito");
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+    }
 
     @Override
     public void modificarEditorial(Editorial e) {
-      Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.update(e);
-    session.getTransaction().commit();
-    session.close();
-  FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Editorial modificada con exito" ,"Editorial modificada con exito");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(e);
+        session.getTransaction().commit();
+        session.close();
+        FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Editorial modificada con exito", "Editorial modificada con exito");
+        FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
     }
-    
+
 }

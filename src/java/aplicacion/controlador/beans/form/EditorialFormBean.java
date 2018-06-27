@@ -13,27 +13,28 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedProperty;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class EditorialFormBean implements Serializable{
+public class EditorialFormBean implements Serializable {
+
     @ManagedProperty(value = "#{editorialBean}")
-private EditorialBean editorialBean;
-    private List<Editorial>editoriales;
+    private EditorialBean editorialBean;
+    private List<Editorial> editoriales;
     private Editorial editorial;
     private Editorial editorialSeleccionada;
     private boolean dialogo;
-
 
     /**
      * Creates a new instance of EditorialFormBean
      */
     public EditorialFormBean() {
-        editorial=new Editorial();
-        editorialSeleccionada=new Editorial();
+        editorial = new Editorial();
+        editorialSeleccionada = new Editorial();
     }
 
     public EditorialBean getEditorialBean() {
@@ -43,7 +44,6 @@ private EditorialBean editorialBean;
     public void setEditorialBean(EditorialBean editorialBean) {
         this.editorialBean = editorialBean;
     }
-    
 
     public List<Editorial> getEditoriales() {
         return editoriales;
@@ -76,35 +76,38 @@ private EditorialBean editorialBean;
     public void setDialogo(boolean dialogo) {
         this.dialogo = dialogo;
     }
-    
 
-    
-    public void listarEditoriales(){
-        this.editoriales=editorialBean.obtenerEditoriales();
+    public void listarEditoriales() {
+        this.editoriales = editorialBean.obtenerEditoriales();
     }
-    
+
     @PostConstruct
-    public void init(){
-    listarEditoriales();
+    public void init() {
+        listarEditoriales();
     }
-       public void agregarEditorial(){
-    
-    editorialBean.agregarEditorial(editorial);
-    init();
-    ocultarDialogo();
+
+    public void agregarEditorial() {
+
+        editorialBean.agregarEditorial(editorial);
+        init();
+        ocultarDialogo();
     }
-    public void seleccionarEditorial (Editorial edi){
-    this.editorialSeleccionada=edi;
-    mostrarDialogo();
+
+    public void seleccionarEditorial(Editorial edi) {
+        this.editorialSeleccionada = edi;
+        mostrarDialogo();
     }
-    public void modificarEditorial(){
-    editorialBean.modificarEditorial(editorialSeleccionada);
-    ocultarDialogo();
+
+    public void modificarEditorial() {
+        editorialBean.modificarEditorial(editorialSeleccionada);
+        ocultarDialogo();
     }
-       public void mostrarDialogo (){
-    this.dialogo=true;
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
     }
-    public void ocultarDialogo (){
-    this.dialogo=false;
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
 }

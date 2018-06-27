@@ -40,19 +40,18 @@ public class PublicacionFormBean implements Serializable {
     private List<Publicacion> librosEncontrados;
     private String buscar;
 
-    private boolean dialogo=false;
-   
+    private boolean dialogo = false;
 
     /**
      * Creates a new instance of PublicacionFormBean
      */
     public PublicacionFormBean() {
-        autor=new Autor();
-        editorial=new Editorial();
-        publicacion=new Publicacion();
-        publicacionAutor=new PubAut();
-        libroSeleccionado=new Publicacion();
-        librosEncontrados=new ArrayList<>();
+        autor = new Autor();
+        editorial = new Editorial();
+        publicacion = new Publicacion();
+        publicacionAutor = new PubAut();
+        libroSeleccionado = new Publicacion();
+        librosEncontrados = new ArrayList<>();
     }
 
     public PublicacionBean getPublicacionBean() {
@@ -95,8 +94,6 @@ public class PublicacionFormBean implements Serializable {
         this.publicacion = publicacion;
     }
 
-  
-
     public boolean isDialogo() {
         return dialogo;
     }
@@ -137,7 +134,6 @@ public class PublicacionFormBean implements Serializable {
         this.buscar = buscar;
     }
 
-
     public void listarLibros() {
 
         this.publicaciones = publicacionBean.obtenerPublicaciones();
@@ -147,53 +143,61 @@ public class PublicacionFormBean implements Serializable {
     public void init() {
 
         listarLibros();
-        this.librosEncontrados=(List<Publicacion>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("libros");
- 
+        this.librosEncontrados = (List<Publicacion>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("libros");
+
     }
 
     public void altaDePublicacion() {
-       try{
-        publicacion.setEditorial(editorial);
-        publicacion.setEstado(true);
-        
-        publicacionBean.altaDePublicaion(publicacion);
-        publicacionAutor.setAutor(autor);
-        publicacionAutor.setPublicacion(publicacion);
-        publicacionAutor.setPaEstado(true);
-        publicacionBean.altaDePublicaionAutor(publicacionAutor);
-        init();
-    ocultarDialogo();
-    autor=new Autor();
-        editorial=new Editorial();
-        publicacion=new Publicacion();
-        publicacionAutor=new PubAut();
-        libroSeleccionado=new Publicacion();
-       }catch(Exception e){{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error Codigo de libro ya existe" ,"Error Codigo de libro ya existe");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);}
+        try {
+            publicacion.setEditorial(editorial);
+            publicacion.setEstado(true);
+
+            publicacionBean.altaDePublicaion(publicacion);
+            publicacionAutor.setAutor(autor);
+            publicacionAutor.setPublicacion(publicacion);
+            publicacionAutor.setPaEstado(true);
+            publicacionBean.altaDePublicaionAutor(publicacionAutor);
+            init();
+            ocultarDialogo();
+            autor = new Autor();
+            editorial = new Editorial();
+            publicacion = new Publicacion();
+            publicacionAutor = new PubAut();
+            libroSeleccionado = new Publicacion();
+        } catch (Exception e) {
+            {
+                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Codigo de libro ya existe", "Error Codigo de libro ya existe");
+                FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+            }
+        }
     }
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
     }
-    public void mostrarDialogo(){
-    this.dialogo=true;
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
-    public void ocultarDialogo(){
-    this.dialogo=false;
+
+    public void seleccionarLibro(Publicacion p) {
+        this.libroSeleccionado = p;
+        mostrarDialogo();
     }
-    public void seleccionarLibro(Publicacion p){
-    this.libroSeleccionado=p;
-    mostrarDialogo();
+
+    public void modificarLibro() {
+        publicacionBean.modificarPublicacion(libroSeleccionado);
+        ocultarDialogo();
     }
-    public void modificarLibro(){
-    publicacionBean.modificarPublicacion(libroSeleccionado);
-    ocultarDialogo();
-    }
-    public void buscarLibro() throws IOException{
-    this.librosEncontrados=publicacionBean.librosEncontrados(buscar);
-    if (this.librosEncontrados.isEmpty()){
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"No se encotro coincidencias" ,"No se encotro coincidencias");
+
+    public void buscarLibro() throws IOException {
+        this.librosEncontrados = publicacionBean.librosEncontrados(buscar);
+        if (this.librosEncontrados.isEmpty()) {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "No se encotro coincidencias", "No se encotro coincidencias");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    }else{
-  
-    FacesContext.getCurrentInstance().getExternalContext().redirect("ResultadosBusqueda.xhtml");
-    }
+        } else {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("ResultadosBusqueda.xhtml");
+        }
     }
 }

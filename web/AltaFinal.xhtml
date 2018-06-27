@@ -7,13 +7,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./Estructura/newTemplate.xhtml">
-
             <ui:define name="content">
-               <h:form id="Ufinal">
+                <h:form id="Ufinal">
                     <p:growl id="msjs" showDetail="true" sticky="true"/>
-
                     <p:panel header="Datos Del usuario">
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombreU" value="Nombre De Usuario" for="txtnombreU"/>
@@ -26,17 +23,10 @@
                                         required="true" validatorMessage="No coincide la contraseña" maxlength="12"
                                         match="txtpsw2" feedback="true"/>
                             <p:outputLabel id="lblcontra2" value="Contraseña" for="txtpsw2"/>
-
-
-                            <p:password id="txtpsw2"
-                                        required="true" />
-
-
+                            <p:password id="txtpsw2" required="true" />
                         </h:panelGrid>
                     </p:panel>
-                    <br>
 
-                    </br>
                     <p:panel header="Datos personales">
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
@@ -70,20 +60,15 @@
                                 <f:validateLength maximum="8"/>
                             </p:inputNumber>
                             <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
-                            <p:inputText id="txtfecha" value="#{altaFormBean.perfil.fechaNac}"
-                                         required="true" >
-                                <f:convertDateTime type="date"/>
-                            </p:inputText>
+                           
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" />
+
+                            <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilF()}" 
+                                             update="msjs,Ufinal"/>
                         </h:panelGrid>
                     </p:panel>
-                    <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilF()}" 
-                                     update="msjs,Ufinal"/>
                 </h:form>
-
-
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

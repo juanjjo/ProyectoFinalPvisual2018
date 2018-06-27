@@ -23,18 +23,20 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class AltaFormBean implements Serializable{
+public class AltaFormBean implements Serializable {
+
     @ManagedProperty(value = "#{perfilBeans}")
     private PerfilBeans perfilbeans;
     private UsuarioBean usuariobeans;
     private Usuario usuariof;
     private Perfil perfil;
+
     /**
      * Creates a new instance of AltaFormBean
      */
     public AltaFormBean() {
-         perfil=new Perfil();
-         usuariof=new Usuario("final", true);
+        perfil = new Perfil();
+        usuariof = new Usuario("final", true);
     }
 
     public PerfilBeans getPerfilbeans() {
@@ -53,7 +55,6 @@ public class AltaFormBean implements Serializable{
         this.usuariof = usuariof;
     }
 
-  
     public Perfil getPerfil() {
         return perfil;
     }
@@ -69,14 +70,16 @@ public class AltaFormBean implements Serializable{
     public void setUsuariobeans(UsuarioBean usuariobeans) {
         this.usuariobeans = usuariobeans;
     }
-    public void agregarPerfilF (){
-     
-        if(usuariof!=null){
-        perfil.setUsuario(usuariof);
-        perfilbeans.agregarPerfil(perfil);
-        usuariof=new Usuario("final", true);
-    }else{ FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Faltan datos de usuario" ,"Faltan datos de usuario");
+
+    public void agregarPerfilF() {
+
+        if (usuariof != null) {
+            perfil.setUsuario(usuariof);
+            perfilbeans.agregarPerfil(perfil);
+            usuariof = new Usuario("final", true);
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos de usuario", "Faltan datos de usuario");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-             }
-}
+        }
+    }
 }

@@ -7,11 +7,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
-
             <ui:define name="content">
-               <h:form id="frmPub">
+                <h:form id="frmPub">
                     <p:panel >
                         <p:dataTable id="tblp" var="usuario" value="#{usuarioFormBean.usuariosAdministradores}">
 
@@ -29,7 +27,6 @@
                             </p:column>
 
                         </p:dataTable>
-
                     </p:panel>
                 </h:form>
                 <h:form id="frmdialogo">
@@ -44,19 +41,14 @@
                                 <f:selectItem itemLabel="Activo" itemValue="true"/>
                                 <f:selectItem itemLabel="Inactivo" itemValue="false"/>
                             </p:selectOneRadio>
-                                
-                            
-                    </h:panelGrid>
+                        </h:panelGrid>
                         <p:commandButton value="Guardar cambios" actionListener="#{usuarioFormBean.modificarUsuario()}" 
                                          update="msj,frmdialogo"/>
                         <p:commandButton value="Cancelar" actionListener="#{usuarioFormBean.ocultarDialogo()}"
                                          update="frmdialogo"/>
                     </p:dialog>
-
-            </h:form>
+                </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

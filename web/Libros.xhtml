@@ -7,9 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
-
             <ui:define name="content">
                 <h:form id="frmPub">
                     <p:panel >
@@ -42,18 +40,16 @@
                                 <p:outputLabel value="#{pub.stock}" />
                             </p:column>
 
-
                             <p:column headerText="Reservas" rendered="#{loginFormBean.renderFinal}">  
                                 <p:commandButton value="Reservar Libro" 
-                             actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserva"/>
+                                                 actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserva"/>
                             </p:column>
                             <p:column headerText="Editar" rendered="#{loginFormBean.renderAdmin}">  
                                 <p:commandButton value="Editar libro" actionListener="#{publicacionFormBean.seleccionarLibro(pub)}"
                                                  update="frmdialogo2"  />
                             </p:column>
 
-                        </p:dataTable>
-                        
+                        </p:dataTable>                        
                     </p:panel>
                     <p:commandButton value="Nuevo libro" rendered="#{loginFormBean.renderAdmin}" 
                                      actionListener="#{publicacionFormBean.mostrarDialogo()}" update="frmdialogo"/>
@@ -63,17 +59,17 @@
                     <p:dialog id="di" header="Nuevo libro" widgetVar="dialogo"  visible="#{publicacionFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
                               footer="Biblioteca San Francisco-Programacion visual 2018">
                         <h:panelGrid columns="3">
-                             <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
-                             <p:inputText id="txtcodigo" value="#{publicacionFormBean.publicacion.codigo}"
-                                          required="true"/>
-                             <p:outputLabel/>
+                            <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
+                            <p:inputText id="txtcodigo" value="#{publicacionFormBean.publicacion.codigo}"
+                                         required="true"/>
+                            <p:outputLabel/>
                             <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
                             <p:inputText id="txttitulo" value="#{publicacionFormBean.publicacion.nombre}"
                                          required="true" validatorMessage="Titulo incorrecto">
-                                
+
                                 <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
-                             <p:outputLabel/>
+                            <p:outputLabel/>
                             <p:outputLabel value="Autor"/>
                             <p:selectOneMenu value="#{publicacionFormBean.autor}" converter="omnifaces.SelectItemsConverter">
                                 <f:selectItems  value="#{autorFormBean.autores}" var="autor"
@@ -89,7 +85,7 @@
                             <p:outputLabel id="lblresumen" value="Resumen" for="txtresumen"/>
                             <p:inputText id="txtresumen" value="#{publicacionFormBean.publicacion.resumen}" validatorMessage="Resumen incorrecto"
                                          required="true">
-                            <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                                <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
                             <p:outputLabel />
                             <p:outputLabel id="lbltipo" value="Tipo" for="txttipo"/>
@@ -98,25 +94,25 @@
                             <p:outputLabel />
                             <p:outputLabel id="lblstock" value="Stock" for="txtstock" />
                             <p:inputNumber id="txtstock" value="#{publicacionFormBean.publicacion.stock}" 
-                                                          required="true" decimalPlaces="0"/>
-                              <p:outputLabel />
+                                           required="true" decimalPlaces="0"/>
+                            <p:outputLabel />
                             <p:commandButton value="Agregar"  actionListener="#{publicacionFormBean.altaDePublicacion()}"
                                              update="frmPub,mensaje,di"/>
                         </h:panelGrid>
                     </p:dialog>
-                   </h:form>
+                </h:form>
                 <h:form id="frmdialogo2" >
                     <p:growl id="mensaje2" />
                     <p:dialog id="di2" header="Editar" widgetVar="dialogo"  visible="#{publicacionFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
                               footer="Biblioteca San Francisco-Programacion visual 2018">
                         <h:panelGrid columns="2">
-                             <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
-                             <p:inputText id="txtcodigo" value="#{publicacionFormBean.libroSeleccionado.codigo}"
-                                          required="true" disabled="true"/>
+                            <p:outputLabel id="lblcodogo" value="Codigo" for="txtcodigo"/>
+                            <p:inputText id="txtcodigo" value="#{publicacionFormBean.libroSeleccionado.codigo}"
+                                         required="true" disabled="true"/>
                             <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
                             <p:inputText id="txttitulo" value="#{publicacionFormBean.libroSeleccionado.nombre}"
                                          required="true" validatorMessage="Nombre incorrecto">
-                               <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                                <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblestado" value="Estado" for="txtestado"/>
                             <p:selectOneRadio id="txtestado" value="#{publicacionFormBean.libroSeleccionado.estado}" required="true">
@@ -131,53 +127,49 @@
                             <p:outputLabel id="lblresumen" value="Resumen" for="txtresumen"/>
                             <p:inputText id="txtresumen" value="#{publicacionFormBean.libroSeleccionado.resumen}" validatorMessage="Resumen solo debe contener letras y numeros"
                                          required="true">
-                            <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                                <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lbltipo" value="Tipo" for="txttipo"/>
                             <p:inputText id="txttipo" value="#{publicacionFormBean.libroSeleccionado.tipo}" validatorMessage="Tipo incorrecto" required="true">
-                             <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
+                                <f:validateRegex pattern="^[á-úa-zA-Z0-9 ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblstock" value="Stock" for="txtstock" />
                             <p:inputNumber id="txtstock" value="#{publicacionFormBean.libroSeleccionado.stock}" 
-                                                          required="true" decimalPlaces="0"/>
+                                           required="true" decimalPlaces="0"/>
                             <p:commandButton value="Guardar cambios"  actionListener="#{publicacionFormBean.modificarLibro()}"
                                              update="frmPub,mensaje2,di2" />
                         </h:panelGrid>
                     </p:dialog>
-                   </h:form>
-                 
+                </h:form>
+
                 <h:form id="frmDialogoReserva">
                     <p:growl id="msj" />
                     <p:dialog header="Nueva reserva" visible="#{reservaFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
-                               footer="Biblioteca San Francisco-Programacion visual 2018">
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
                         <h:panelGrid columns="2">
                             <p:outputLabel value="Nombre :"/>
                             <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.nombre}"/>
-                             <p:outputLabel value="Editorial :"/>
-                             <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.editorial.nombre}"/>
-                         <p:outputLabel value="Usuario :" />
-                         <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
-                          <p:outputLabel value="Fecha de emision de la reserva :"/>
-                          <p:outputLabel value="#{reservaFormBean.reserva.fechaEmision}">
-                              <f:convertDateTime type="date"/>
-                          </p:outputLabel>
-                          <p:outputLabel id="lblfechaturno" value="Fecha de turno" for="txtfechaturno" />
-                          <p:inputText id="txtfechaturno" value="#{reservaFormBean.reserva.fechaTurno}" required="true">
-                           <f:convertDateTime type="date" /> 
-                           </p:inputText>
-                          <p:outputLabel id="lblcantidad" value="Cantidad" for="txtcantidad"/>
-                          <p:inputNumber id="txtcantidad" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
-                                         required="true"/>
+                            <p:outputLabel value="Editorial :"/>
+                            <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.editorial.nombre}"/>
+                            <p:outputLabel value="Usuario :" />
+                            <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
+                            <p:outputLabel value="Fecha de emision de la reserva :"/>
+                            <p:outputLabel value="#{reservaFormBean.reserva.fechaEmision}">
+                                <f:convertDateTime type="date"/>
+                            </p:outputLabel>
+                            <p:outputLabel id="lblfechaturno" value="Fecha de turno" for="txtfechaturno" />
+                            <p:inputText id="txtfechaturno" value="#{reservaFormBean.reserva.fechaTurno}" required="true">
+                                <f:convertDateTime type="date" /> 
+                            </p:inputText>
+                            <p:outputLabel id="lblcantidad" value="Cantidad" for="txtcantidad"/>
+                            <p:inputNumber id="txtcantidad" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
+                                           required="true"/>
                             <p:commandButton value="Reservar" actionListener="#{reservaFormBean.nuevaReserva()}"
                                              update="frmDialogoReserva,msj"/>
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
-                
-                                  
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

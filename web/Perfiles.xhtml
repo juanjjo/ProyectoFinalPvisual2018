@@ -9,31 +9,39 @@
     <body>
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
             <ui:define name="content">
+
                 <h:form id="frmperfil">
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Nombre : "/>
-                        <h:outputText value="#{loginFormBean.perfil.nombre}">
-                        </h:outputText>
-                        <p:outputLabel value=" Apellido : "/>
-                        <h:outputText value="#{loginFormBean.perfil.apellido}">
-                        </h:outputText>
-                        <p:outputLabel value="Direccion : "/>
-                        <h:outputText value="#{loginFormBean.perfil.direccion}">
-                        </h:outputText>                        
-                        <p:outputLabel value=" Fecha de nacimiento: "/>
-                        <h:outputText value="#{loginFormBean.perfil.fechaNac}">
-                            <f:convertDateTime pattern="MM-dd-yyyy" />
-                        </h:outputText>
-                        <p:outputLabel value="Email : "/>
-                        <h:outputText value="#{loginFormBean.perfil.email}">
-                        </h:outputText> 
-                        <p:outputLabel value="Dni :  "/>
-                        <h:outputText value="#{loginFormBean.perfil.dni}">
-                        </h:outputText> 
-                        
-                    </p:panelGrid> 
-                    <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.mostrarDialogo()}" update="frmdialogo" />
+                    <p:panel>
+                        <f:facet name="header">
+                            Perfil
+                        </f:facet>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Nombre : "/>
+                            <h:outputText value="#{loginFormBean.perfil.nombre}">
+                            </h:outputText>
+                            <p:outputLabel value=" Apellido : "/>
+                            <h:outputText value="#{loginFormBean.perfil.apellido}">
+                            </h:outputText>
+                            <p:outputLabel value="Direccion : "/>
+                            <h:outputText value="#{loginFormBean.perfil.direccion}">
+                            </h:outputText>                        
+                            <p:outputLabel value=" Fecha de nacimiento: "/>
+                            <h:outputText value="#{loginFormBean.perfil.fechaNac}">
+                                <f:convertDateTime pattern="MM-dd-yyyy" />
+                            </h:outputText>
+                            <p:outputLabel value="Email : "/>
+                            <h:outputText value="#{loginFormBean.perfil.email}">
+                            </h:outputText> 
+                            <p:outputLabel value="Dni :  "/>
+                            <h:outputText value="#{loginFormBean.perfil.dni}">
+                            </h:outputText> 
+
+                        </h:panelGrid> 
+                        <p:commandButton value="Editar perfil" actionListener="#{modificacionFormBean.mostrarDialogo()}" update="frmdialogo" />
+                    </p:panel>
+                   
                 </h:form>
+
                 <h:form id="frmdialogo" >
                     <p:growl id="mensaje" />
                     <p:dialog header="Edicion de perfil" widgetVar="dialogo" visible="#{modificacionFormBean.dialogo}" 

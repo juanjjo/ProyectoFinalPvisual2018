@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+
 /**
  *
  * @author Gabriel
@@ -32,13 +33,12 @@ public class LoginFormBean implements Serializable {
     private boolean renderFinal;
     private boolean renderAdmin;
     private boolean renderSuper;
-    public boolean dialogo=false;
+    public boolean dialogo = false;
 
     public LoginFormBean() {
 
     }
-     
-
+    
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;
     }
@@ -94,7 +94,6 @@ public class LoginFormBean implements Serializable {
     public void setDialogo(boolean dialogo) {
         this.dialogo = dialogo;
     }
-    
 
     public void valiadrUsuario() throws IOException {
         Usuario usuario = usuarioBean.validarUsuario(nombreUsuario, password);
@@ -147,24 +146,26 @@ public class LoginFormBean implements Serializable {
         Usuario usu = usuarioBean.validarSesion();
         if (usu == null) {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect("Pagina sin usuario.xhtml"); 
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Pagina sin usuario.xhtml");
         }
     }
-    public void mostrarDialogo(){
-    this.dialogo=true;
-        
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
+
     }
-    public void ocultarDialogo(){
-    this.dialogo=false;
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
-    
-  
-    
-   @PostConstruct
-   public void init(){
-    Usuario usu = usuarioBean.validarSesion();
+
+    @PostConstruct
+    public void init() {
+        Usuario usu = usuarioBean.validarSesion();
         if (usu != null) {
             mostrarDialogo();
-        }else{ocultarDialogo();}
-   }
+        } else {
+            ocultarDialogo();
+        }
+    }
 }

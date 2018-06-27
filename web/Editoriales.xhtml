@@ -7,24 +7,19 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
         <ui:composition template="./Estructura/MasterTemplate.xhtml">
-
             <ui:define name="content">
                 <h:form id="frmEditoriales">
-                     <p:panel header="Editoriales">
-                         <p:dataTable id="tblp" var="editorial" value="#{editorialFormBean.editoriales}">
+                    <p:panel header="Editoriales">
+                        <p:dataTable id="tblp" var="editorial" value="#{editorialFormBean.editoriales}">
                             <p:column headerText="Nombre">  
                                 <p:outputLabel value="#{editorial.nombre}" />
                             </p:column>
-
                             <p:column headerText=" Editar" rendered="#{loginFormBean.renderAdmin}">  
                                 <p:commandButton value="Editar" actionListener="#{editorialFormBean.seleccionarEditorial(editorial)}"
                                                  update="dialogo1"/>
                             </p:column>
-
-                        </p:dataTable>
-                        
+                        </p:dataTable>                        
                     </p:panel>
                     <p:commandButton value="Nuevo Editorial" rendered="#{loginFormBean.renderAdmin}"
                                      actionListener="#{editorialFormBean.mostrarDialogo()}" update="dialogo2"/>
@@ -32,12 +27,12 @@
                 <h:form id="dialogo1">
                     <p:growl id="msj" />
                     <p:dialog id="dialogo" visible="#{editorialFormBean.dialogo}" header="Editar editorial" showEffect="explode" hideEffect="explode" modal="true"
-                               footer="Biblioteca San Francisco-Programacion visual 2018">
+                              footer="Biblioteca San Francisco-Programacion visual 2018">
                         <h:panelGrid columns="2">
                             <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
                             <p:inputText id="txtnombre" value="#{editorialFormBean.editorialSeleccionada.nombre}"
                                          required="true" validatorMessage="Nombre invalido">
-                              <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                             </p:inputText>
                             <p:outputLabel id="lblestado" value="Estado" for="txtestado" />
                             <p:selectOneRadio id="txtestado" value="#{editorialFormBean.editorialSeleccionada.estado}" required="true">
@@ -50,34 +45,30 @@
                         <p:commandButton value="Cancelar" actionListener="#{editorialFormBean.ocultarDialogo()}"
                                          update="dialogo"/> 
                     </p:dialog>
-                   </h:form>
-                
-                                    <h:form id="dialogo2">
-                                        <p:growl id="msj"  sticky="true" showDetail="true"/>
-                                        <p:dialog id="dial"  widgetVar="dial" visible="#{editorialFormBean.dialogo}" header="Nueva editorial"
-                                                    footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true">
-                                            <h:panelGrid columns="2">
-                                                <p:outputLabel id="lblnom" value="Nombre" for="txtnom"/>
-                                                <p:inputText id="txtnom" value="#{editorialFormBean.editorial.nombre}"
-                                                             required="true" validatorMessage="Nombre invalido">
-                                                    <f:validateRegex pattern="^[a-zA-Z ]+$"/>
-                                                </p:inputText>
-                                                <p:outputLabel id="lblest" value="Estado" for="txtest"/>
-                                                <p:selectOneRadio id="txtest" value="#{editorialFormBean.editorial.estado}" required="true">
-                                                  <f:selectItem itemLabel="Activo" itemValue="true"/>
-                                                  <f:selectItem itemLabel="Inactivo" itemValue="false"/>
-                                                </p:selectOneRadio>
-                                            </h:panelGrid>
-                                             <p:commandButton value="Agregar" actionListener="#{editorialFormBean.agregarEditorial()}"
-                                                             update="dialogo2,msj,frmEditoriales"/>
-                                             <p:commandButton value="Cancelar" onclick="PF('dial').hide();"/>
-                                         </p:dialog>
-                                    </h:form>
+                </h:form>
 
-               
+                <h:form id="dialogo2">
+                    <p:growl id="msj"  sticky="true" showDetail="true"/>
+                    <p:dialog id="dial"  widgetVar="dial" visible="#{editorialFormBean.dialogo}" header="Nueva editorial"
+                              footer="Biblioteca San Francisco-Programacion visual 2018" showEffect="explode" hideEffect="explode" modal="true">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel id="lblnom" value="Nombre" for="txtnom"/>
+                            <p:inputText id="txtnom" value="#{editorialFormBean.editorial.nombre}"
+                                         required="true" validatorMessage="Nombre invalido">
+                                <f:validateRegex pattern="^[a-zA-Z ]+$"/>
+                            </p:inputText>
+                            <p:outputLabel id="lblest" value="Estado" for="txtest"/>
+                            <p:selectOneRadio id="txtest" value="#{editorialFormBean.editorial.estado}" required="true">
+                                <f:selectItem itemLabel="Activo" itemValue="true"/>
+                                <f:selectItem itemLabel="Inactivo" itemValue="false"/>
+                            </p:selectOneRadio>
+                        </h:panelGrid>
+                        <p:commandButton value="Agregar" actionListener="#{editorialFormBean.agregarEditorial()}"
+                                         update="dialogo2,msj,frmEditoriales"/>
+                        <p:commandButton value="Cancelar" onclick="PF('dial').hide();"/>
+                    </p:dialog>
+                </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

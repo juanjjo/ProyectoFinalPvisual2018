@@ -19,64 +19,65 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Gabriel
  */
-public class PerfilDAOImp implements IPerfilDAO{
+public class PerfilDAOImp implements IPerfilDAO {
 
     @Override
     public Perfil loginP(Usuario usu) {
-Perfil perfil = null;
+        Perfil perfil = null;
 
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Perfil.class);
-        criteria.add(Restrictions.like("usuario",usu));
-     
-        if(!criteria.list().isEmpty())
-            perfil = (Perfil)criteria.list().get(0);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("perfil",perfil);
+        criteria.add(Restrictions.like("usuario", usu));
+
+        if (!criteria.list().isEmpty()) {
+            perfil = (Perfil) criteria.list().get(0);
+        }
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("perfil", perfil);
         session.close();
-       return perfil;
+        return perfil;
     }
 
     @Override
     public void agregar(Perfil perfil) {
-      try{
-        if(perfil!=null){
-    Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.save(perfil);
-    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usu", perfil.getUsuario());
-    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("perfil",perfil);
-    session.getTransaction().commit();
-    session.close();
-  
-    FacesContext.getCurrentInstance().getExternalContext().redirect("Home.xhtml");
-     
-    
-    }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Faltan datos" ,"Faltan datos");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
-    }
-         }catch(Exception e){}  
+        try {
+            if (perfil != null) {
+                Session session = NewHibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.save(perfil);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usu", perfil.getUsuario());
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("perfil", perfil);
+                session.getTransaction().commit();
+                session.close();
+
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Home.xhtml");
+
+            } else {
+                FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos", "Faltan datos");
+                FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override
     public void modificar(Perfil perfil) {
-         if(perfil!=null){
-    Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.update(perfil);
-    session.getTransaction().commit();
-    
-    session.close();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"PERFIL MODIFICADO" ,"PERFIL MODIFICADO");
+        if (perfil != null) {
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(perfil);
+            session.getTransaction().commit();
+
+            session.close();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "PERFIL MODIFICADO", "PERFIL MODIFICADO");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
-    }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Faltan datos" ,"Faltan datos");
+
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos", "Faltan datos");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
-    }
-   
-    }
+
+        }
 
     }
-    
 
+}

@@ -11,14 +11,17 @@ import aplicacion.modelo.dominio.Reserva;
 import aplicacion.dao.imp.ram.ReservaDAOImp;
 import aplicacion.modelo.dominio.DetalleReserva;
 import java.io.Serializable;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class ReservaBean implements Serializable{
-private Reserva reserva;
+public class ReservaBean implements Serializable {
+
+    private Reserva reserva;
+
     /**
      * Creates a new instance of ReservaBean
      */
@@ -32,14 +35,15 @@ private Reserva reserva;
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
-   
-    public void altaDeReserva(Reserva r){
-    ReservaDAOImp reservaDAO = new ReservaDAOImp();
-    reservaDAO.altaReserva(r);
+
+    public void altaDeReserva(Reserva r) {
+        ReservaDAOImp reservaDAO = new ReservaDAOImp();
+        reservaDAO.altaReserva(r);
     }
-    public void altaDeDetalleDeReserva(DetalleReserva dr){
-    ReservaDAOImp reservaDAO = new ReservaDAOImp();
-    reservaDAO.nuevoDetalleDeReserva(dr);
+
+    public void altaDeDetalleDeReserva(DetalleReserva dr) {
+        ReservaDAOImp reservaDAO = new ReservaDAOImp();
+        reservaDAO.nuevoDetalleDeReserva(dr);
     }
-    
+
 }

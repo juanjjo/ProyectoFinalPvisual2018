@@ -3,33 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
-
         <ui:composition template="./Estructura/newTemplate.xhtml">
-           
             <ui:define name="content">
-<h:form id="frmlogin">
+                <h:form id="frmlogin">
                     <p:growl id="msjgeneral" showDetail="false" sticky="false"/>
-                    <p:panel id="pnlusu" header="Acceso al Sistema" footer="Biblioteca San Francisco-Programacion visual 2018">
-                       
+                    <p:panel id="pnlusu"  header="Acceso al Sistema" footer="Biblioteca San Francisco-Programacion visual 2018">
+                        
                         <h:panelGrid columns="2" cellpadding="5">
+            
                             <p:outputLabel for="txtnombre" value="Ingrese Nombre de Usuario: "/>
                             <p:inputText id="txtnombre" required="true" value="#{loginFormBean.nombreUsuario}"/>
-                            
+
                             <p:outputLabel for="txtcontraseña" value="Ingrese Password: "/>
                             <p:password id="txtcontraseña" required="true" value="#{loginFormBean.password}" style="display:list-item "/>
-                            
+
                             <h:panelGroup/>
                             <p:commandButton id="btnValidar" actionListener="#{loginFormBean.valiadrUsuario()}" value="Validar usuario" 
                                              update="frmlogin,msjgeneral" />
-                            </h:panelGrid>
-                            <h:panelGrid columns="2">
-                                <p:outputLabel value="No tenes cuenta?"/>
-                                <p:link value=" Crear cuenta" outcome="AltaFinal.xhtml" />
-                            </h:panelGrid>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="No tenes cuenta?"/>
+                            <p:link value=" Crear cuenta" outcome="AltaFinal.xhtml" />
+                        </h:panelGrid>
                     </p:panel> 
                 </h:form>
                 <h:form>
@@ -45,8 +43,6 @@
                     </p:dialog>
                 </h:form>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

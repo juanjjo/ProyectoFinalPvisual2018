@@ -13,16 +13,18 @@ import java.util.List;
 import aplicacion.dao.imp.ram.PublicacionDAOImp;
 import java.io.Serializable;
 import aplicacion.modelo.dominio.PubAut;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class PublicacionBean implements Serializable{
-private Publicacion publicacion;
+public class PublicacionBean implements Serializable {
 
-/**
+    private Publicacion publicacion;
+
+    /**
      * Creates a new instance of PublicaionBean
      */
     public PublicacionBean() {
@@ -35,27 +37,32 @@ private Publicacion publicacion;
     public void setPublicacion(Publicacion publicacion) {
         this.publicacion = publicacion;
     }
-    public List<Publicacion> obtenerPublicaciones(){
+
+    public List<Publicacion> obtenerPublicaciones() {
         PublicacionDAOImp publicacionDao = new PublicacionDAOImp();
-    return publicacionDao.obtenerLista();
+        return publicacionDao.obtenerLista();
     }
-    public void altaDePublicaion(Publicacion pub){
-    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
-    pubDAO.nuevaPublicaion(pub);
-    
+
+    public void altaDePublicaion(Publicacion pub) {
+        PublicacionDAOImp pubDAO = new PublicacionDAOImp();
+        pubDAO.nuevaPublicaion(pub);
+
     }
-     public void altaDePublicaionAutor(PubAut pubAutor){
-    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
-    pubDAO.nuevaPublicaionAutor(pubAutor);
-    
+
+    public void altaDePublicaionAutor(PubAut pubAutor) {
+        PublicacionDAOImp pubDAO = new PublicacionDAOImp();
+        pubDAO.nuevaPublicaionAutor(pubAutor);
+
     }
-     public void modificarPublicacion (Publicacion pu){
-    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
-    pubDAO.modificarPublicacion(pu);
-     
-     }
-     public List<Publicacion> librosEncontrados(String palabra){
-    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
-   return pubDAO.buscarLibro(palabra);
-     } 
+
+    public void modificarPublicacion(Publicacion pu) {
+        PublicacionDAOImp pubDAO = new PublicacionDAOImp();
+        pubDAO.modificarPublicacion(pu);
+
+    }
+
+    public List<Publicacion> librosEncontrados(String palabra) {
+        PublicacionDAOImp pubDAO = new PublicacionDAOImp();
+        return pubDAO.buscarLibro(palabra);
+    }
 }

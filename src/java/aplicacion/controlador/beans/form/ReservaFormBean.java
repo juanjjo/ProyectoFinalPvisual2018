@@ -16,26 +16,29 @@ import java.util.Date;
 import javax.faces.context.FacesContext;
 import aplicacion.modelo.dominio.Publicacion;
 import java.io.Serializable;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class ReservaFormBean implements Serializable{
+public class ReservaFormBean implements Serializable {
+
     @ManagedProperty(value = "#{reservaBean}")
     private ReservaBean reservaBean;
     private Reserva reserva;
     private DetalleReserva detalleReserva;
     private boolean dialogo;
     private Publicacion publicacionSeleccionada;
+
     /**
      * Creates a new instance of ReservaFormBean
      */
     public ReservaFormBean() {
-     publicacionSeleccionada =new Publicacion();
-    reserva=new Reserva(new Date(), true);
-    detalleReserva=new DetalleReserva();
+        publicacionSeleccionada = new Publicacion();
+        reserva = new Reserva(new Date(), true);
+        detalleReserva = new DetalleReserva();
     }
 
     public ReservaBean getReservaBean() {
@@ -77,28 +80,32 @@ public class ReservaFormBean implements Serializable{
     public void setPublicacionSeleccionada(Publicacion publicacionSeleccionada) {
         this.publicacionSeleccionada = publicacionSeleccionada;
     }
-    public void seleccionarPublicacion(Publicacion p){
-    this.publicacionSeleccionada=p;
-    mostrarDialogo();
+
+    public void seleccionarPublicacion(Publicacion p) {
+        this.publicacionSeleccionada = p;
+        mostrarDialogo();
     }
-    public void nuevaReserva (){
-        Perfil perf=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
-    reserva.setPerfil(perf);
+
+    public void nuevaReserva() {
+        Perfil perf = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
+        reserva.setPerfil(perf);
         reservaBean.altaDeReserva(reserva);
         detalleReserva.setPublicacion(publicacionSeleccionada);
         detalleReserva.setReserva(reserva);
         detalleReserva.setEstado(true);
         reservaBean.altaDeDetalleDeReserva(detalleReserva);
         ocultarDialogo();
-        publicacionSeleccionada =new Publicacion();
-    reserva=new Reserva(new Date(), true);
-    detalleReserva=new DetalleReserva();
+        publicacionSeleccionada = new Publicacion();
+        reserva = new Reserva(new Date(), true);
+        detalleReserva = new DetalleReserva();
 
-  }
-    public void mostrarDialogo(){
-    this.dialogo=true;
     }
-     public void ocultarDialogo(){
-    this.dialogo=false;
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
+    }
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
 }

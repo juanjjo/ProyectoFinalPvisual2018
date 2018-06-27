@@ -11,13 +11,15 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Autor;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class AutorBean implements Serializable{
+public class AutorBean implements Serializable {
+
     private Autor autor;
 
     /**
@@ -33,16 +35,19 @@ public class AutorBean implements Serializable{
     public void setAutor(Autor autor) {
         this.autor = autor;
     }
-public List<Autor> obtenerAutores(){
-    AutorDAOImp autorDao=new AutorDAOImp();
-return autorDao.obtenerAutores();
-}
-public void agregarDeAutor(Autor aut){
-    AutorDAOImp autorDao=new AutorDAOImp();
-    autorDao.agregarAutor(aut);
-}
-public void modificarAutor(Autor aut){
-    AutorDAOImp autorDao=new AutorDAOImp();
-    autorDao.modificarAutor(aut);
-}
+
+    public List<Autor> obtenerAutores() {
+        AutorDAOImp autorDao = new AutorDAOImp();
+        return autorDao.obtenerAutores();
+    }
+
+    public void agregarDeAutor(Autor aut) {
+        AutorDAOImp autorDao = new AutorDAOImp();
+        autorDao.agregarAutor(aut);
+    }
+
+    public void modificarAutor(Autor aut) {
+        AutorDAOImp autorDao = new AutorDAOImp();
+        autorDao.modificarAutor(aut);
+    }
 }

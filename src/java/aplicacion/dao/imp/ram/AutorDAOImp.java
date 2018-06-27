@@ -22,11 +22,11 @@ import org.hibernate.criterion.Order;
  *
  * @author Gabriel.Y
  */
-public class AutorDAOImp implements IAutorDAO,Serializable{
+public class AutorDAOImp implements IAutorDAO, Serializable {
 
     @Override
     public List<Autor> obtenerAutores() {
- List<Autor> listaAutores = new ArrayList<>();
+        List<Autor> listaAutores = new ArrayList<>();
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         //trae de la base datos todos los usuari final nada mas
@@ -35,37 +35,39 @@ public class AutorDAOImp implements IAutorDAO,Serializable{
 
         session.flush();//actuliseme ese opjeto de la base de dato
         session.close();
-    return listaAutores;
+        return listaAutores;
     }
 
     @Override
     public void agregarAutor(Autor a) {
- if(a!=null){
-    Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.save(a);
-    session.getTransaction().commit();
-    session.close();
-  FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Autor Agregado con exito" ,"Autor Agregado con exito");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
- }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Error" ,"Error");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        if (a != null) {
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(a);
+            session.getTransaction().commit();
+            session.close();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Autor Agregado con exito", "Autor Agregado con exito");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         }
     }
 
     @Override
     public void modificarAutor(Autor a) {
-        if(a!=null){
-    Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.update(a);
-    session.getTransaction().commit();
-    session.close();
-  FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Autor Modificado con exito" ,"Autor Modificado con exito");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-        }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR ,"Error" ,"Error");
-  FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        if (a != null) {
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(a);
+            session.getTransaction().commit();
+            session.close();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Autor Modificado con exito", "Autor Modificado con exito");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         }
     }
-    
+
 }

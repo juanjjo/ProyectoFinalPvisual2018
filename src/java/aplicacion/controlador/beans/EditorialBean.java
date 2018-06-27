@@ -11,14 +11,16 @@ import javax.faces.bean.ViewScoped;
 import aplicacion.modelo.dominio.Editorial;
 import java.io.Serializable;
 import java.util.List;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class EditorialBean implements Serializable{
-private Editorial editorial;
+public class EditorialBean implements Serializable {
+
+    private Editorial editorial;
 
     /**
      * Creates a new instance of EditorialBean
@@ -33,17 +35,20 @@ private Editorial editorial;
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-public List<Editorial> obtenerEditoriales(){
-    EditorialDAOImp editorialDao=new EditorialDAOImp();
-    return editorialDao.editoriales();
-}
-public void agregarEditorial(Editorial edit){
-EditorialDAOImp ediDao =new EditorialDAOImp();
-ediDao.agregarEditorial(edit);
-}
-public void modificarEditorial(Editorial edit){
-EditorialDAOImp ediDao =new EditorialDAOImp();
-ediDao.modificarEditorial(edit);
 
-}
+    public List<Editorial> obtenerEditoriales() {
+        EditorialDAOImp editorialDao = new EditorialDAOImp();
+        return editorialDao.editoriales();
+    }
+
+    public void agregarEditorial(Editorial edit) {
+        EditorialDAOImp ediDao = new EditorialDAOImp();
+        ediDao.agregarEditorial(edit);
+    }
+
+    public void modificarEditorial(Editorial edit) {
+        EditorialDAOImp ediDao = new EditorialDAOImp();
+        ediDao.modificarEditorial(edit);
+
+    }
 }

@@ -13,24 +13,27 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedProperty;
+
 /**
  *
  * @author Gabriel.Y
  */
 @ManagedBean
 @ViewScoped
-public class AutorFormBean implements Serializable{
-     @ManagedProperty(value = "#{autorBean}")
-      private AutorBean autorBean;
-      private List<Autor>autores;
-      private Autor autor;
-      private Autor autorSeleccionado;
-      private boolean dialogo=false;
+public class AutorFormBean implements Serializable {
+
+    @ManagedProperty(value = "#{autorBean}")
+    private AutorBean autorBean;
+    private List<Autor> autores;
+    private Autor autor;
+    private Autor autorSeleccionado;
+    private boolean dialogo = false;
+
     /**
      * Creates a new instance of AutorFormBean
      */
     public AutorFormBean() {
-    autor=new Autor();
+        autor = new Autor();
     }
 
     public AutorBean getAutorBean() {
@@ -40,7 +43,6 @@ public class AutorFormBean implements Serializable{
     public void setAutorBean(AutorBean autorBean) {
         this.autorBean = autorBean;
     }
-    
 
     public List<Autor> getAutores() {
         return autores;
@@ -73,37 +75,40 @@ public class AutorFormBean implements Serializable{
     public void setDialogo(boolean dialogo) {
         this.dialogo = dialogo;
     }
-    
 
-     
-    public void ListarAutores(){
-    this.autores=autorBean.obtenerAutores();
+    public void ListarAutores() {
+        this.autores = autorBean.obtenerAutores();
     }
-    
+
     @PostConstruct
-    public void init(){
-    
-    ListarAutores();
+    public void init() {
+
+        ListarAutores();
     }
-    public void agregarAutor(){
-    
-    autorBean.agregarDeAutor(autor);
-    init();
-    ocultarDialogo();
-     autor=new Autor();
+
+    public void agregarAutor() {
+
+        autorBean.agregarDeAutor(autor);
+        init();
+        ocultarDialogo();
+        autor = new Autor();
     }
-    public void seleccionarAutor (Autor au){
-    this.autorSeleccionado=au;
-    mostrarDialogo();
+
+    public void seleccionarAutor(Autor au) {
+        this.autorSeleccionado = au;
+        mostrarDialogo();
     }
-    public void modificarAutor(){
-    autorBean.modificarAutor(autorSeleccionado);
-    ocultarDialogo();
+
+    public void modificarAutor() {
+        autorBean.modificarAutor(autorSeleccionado);
+        ocultarDialogo();
     }
-    public void mostrarDialogo (){
-    this.dialogo=true;
+
+    public void mostrarDialogo() {
+        this.dialogo = true;
     }
-    public void ocultarDialogo (){
-    this.dialogo=false;
+
+    public void ocultarDialogo() {
+        this.dialogo = false;
     }
 }

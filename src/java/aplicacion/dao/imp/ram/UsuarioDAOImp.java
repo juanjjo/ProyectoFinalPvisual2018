@@ -23,18 +23,19 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Gabriel
  */
-public class UsuarioDAOImp implements IUsuarioDAO , Serializable{
+public class UsuarioDAOImp implements IUsuarioDAO, Serializable {
 
     @Override
-    public Usuario login(String nombreUsuario, String password ) {
+    public Usuario login(String nombreUsuario, String password) {
         Usuario usu = null;
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Usuario.class);
-        criteria.add(Restrictions.like("nombreUsuario",nombreUsuario));
-        criteria.add(Restrictions.like("password",password));
-        criteria.add(Restrictions.eq("estado",true));
-        if(!criteria.list().isEmpty()){
-            usu = (Usuario)criteria.list().get(0);}
+        criteria.add(Restrictions.like("nombreUsuario", nombreUsuario));
+        criteria.add(Restrictions.like("password", password));
+        criteria.add(Restrictions.eq("estado", true));
+        if (!criteria.list().isEmpty()) {
+            usu = (Usuario) criteria.list().get(0);
+        }
         session.close();
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usu", usu);
         return usu;
@@ -42,12 +43,12 @@ public class UsuarioDAOImp implements IUsuarioDAO , Serializable{
 
     @Override
     public void add(Usuario usuario) {
-   
+
     }
 
     @Override
     public List<Usuario> listarUsuarios() {
-         List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Usuario> listaUsuarios = new ArrayList<>();
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Usuario.class).add(Restrictions.like("tipoUsuario", "final"));
@@ -56,31 +57,32 @@ public class UsuarioDAOImp implements IUsuarioDAO , Serializable{
 
         session.flush();//actuliseme ese opjeto de la base de dato
         session.close();
-        return listaUsuarios;   
+        return listaUsuarios;
     }
 
     @Override
     public void modificarUsuario(Usuario u) {
-         if(u!=null){
-    Session session = NewHibernateUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    session.update(u);
-    session.getTransaction().commit();
-    
-    session.close();
-    FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Usuario Modificado" ,"Usuario Modificado");
+        if (u != null) {
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(u);
+            session.getTransaction().commit();
+
+            session.close();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Modificado", "Usuario Modificado");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
-    }else{FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO ,"Faltan datos" ,"Faltan datos");
+
+        } else {
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Faltan datos", "Faltan datos");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-    
-    }
-   
+
+        }
+
     }
 
     @Override
     public List<Usuario> listarAdministradores() {
-    List<Usuario> listaDeAdministradores = new ArrayList<>();
+        List<Usuario> listaDeAdministradores = new ArrayList<>();
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Usuario.class).add(Restrictions.like("tipoUsuario", "administrador"));
@@ -89,8 +91,6 @@ public class UsuarioDAOImp implements IUsuarioDAO , Serializable{
 
         session.flush();//actuliseme ese opjeto de la base de dato
         session.close();
-        return listaDeAdministradores;  
+        return listaDeAdministradores;
     }
-    }
-
-   
+}
