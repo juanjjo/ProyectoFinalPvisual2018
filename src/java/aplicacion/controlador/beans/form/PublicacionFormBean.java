@@ -39,6 +39,9 @@ public class PublicacionFormBean implements Serializable {
     private Publicacion libroSeleccionado;
     private List<Publicacion> librosEncontrados;
     private String buscar;
+    private List<PubAut> publicacionAprestar;
+    private String CodigoDePublicacion;
+    
 
     private boolean dialogo = false;
 
@@ -134,6 +137,22 @@ public class PublicacionFormBean implements Serializable {
         this.buscar = buscar;
     }
 
+    public List<PubAut> getPublicacionAprestar() {
+        return publicacionAprestar;
+    }
+
+    public void setPublicacionAprestar(List<PubAut> publicacionAprestar) {
+        this.publicacionAprestar = publicacionAprestar;
+    }
+
+    public String getCodigoDePublicacion() {
+        return CodigoDePublicacion;
+    }
+
+    public void setCodigoDePublicacion(String CodigoDePublicacion) {
+        this.CodigoDePublicacion = CodigoDePublicacion;
+    }
+
     public void listarLibros() {
 
         this.publicaciones = publicacionBean.obtenerPublicaciones();
@@ -200,4 +219,15 @@ public class PublicacionFormBean implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect("ResultadosBusqueda.xhtml");
         }
     }
+    public void buscarPublicacionAprestar(){
+    
+        this.publicacionAprestar = publicacionBean.buscarPublicacionAprestar(CodigoDePublicacion);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("publicacion", publicacionAprestar.get(0).getPublicacion());
+        if(this.publicacionAprestar.isEmpty()){
+              FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se encotro coincidencias", "No se encotro coincidencias");
+            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+        }else{
+      mostrarDialogo();
+    }
+}
 }

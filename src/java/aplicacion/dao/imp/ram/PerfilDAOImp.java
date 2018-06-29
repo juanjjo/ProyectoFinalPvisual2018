@@ -8,6 +8,7 @@ package aplicacion.dao.imp.ram;
 import aplicacion.dao.IPerfilDAO;
 import aplicacion.datos.hibernate.configuracion.NewHibernateUtil;
 import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Publicacion;
 import aplicacion.modelo.dominio.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -80,4 +81,18 @@ public class PerfilDAOImp implements IPerfilDAO {
 
     }
 
+    @Override
+    public Perfil buscarPerfil(String dni) {
+      Perfil perfil=null;
+       
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+       
+        Criteria c =session.createCriteria(Perfil.class).add(Restrictions.like("dni", dni));
+        if(!c.list().isEmpty()){
+        perfil = (Perfil)c.list().get(0);
+    }
+    return perfil;
+    }
 }
+

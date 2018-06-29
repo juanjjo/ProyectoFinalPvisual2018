@@ -30,6 +30,9 @@
                         <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}" outcome="Reservas.xhtml"/>
                     </p:submenu>
                     
+                    <p:submenu label="Prestamos" rendered="#{loginFormBean.renderAdmin}">
+                        <p:menuitem value="Realizar un prestamo" outcome="Prestamo.xhtml"/>
+                     </p:submenu>
                     <p:submenu label="Autores y Editoriales">
                          <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
                          <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>

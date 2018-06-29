@@ -29,11 +29,9 @@ public class PrestamoDAOImp implements IPrestamoDAO, Serializable{
             session.save(p);
             session.getTransaction().commit();
             session.close();
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Prestamo realizado", "Prestamo realizado");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+       
         } else {
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error");
-            FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+         
         } 
     }
 

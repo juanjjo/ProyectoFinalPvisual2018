@@ -17,7 +17,7 @@
 
 
 #bottom {
-    position: relative;
+    position: static;
     background-color: #ffffff;
     padding: 5px;
     margin: 10px 0px 0px 0px;

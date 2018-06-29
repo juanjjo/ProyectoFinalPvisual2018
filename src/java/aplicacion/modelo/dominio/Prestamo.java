@@ -22,6 +22,12 @@ public class Prestamo  implements java.io.Serializable {
     public Prestamo() {
     }
 
+    public Prestamo(Date fechaPrestamo, boolean estado) {
+        this.fechaPrestamo = fechaPrestamo;
+        this.estado = estado;
+    }
+    
+
     public Integer getCodigo() {
         return codigo;
     }

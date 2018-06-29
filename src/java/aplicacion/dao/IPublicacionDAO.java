@@ -20,5 +20,6 @@ public interface IPublicacionDAO {
     public void nuevaPublicaionAutor (PubAut publicacionAutor);
     public void modificarPublicacion (Publicacion p);
     public List<Publicacion> buscarLibro (String busqueda);
+    public List<PubAut> LibroAprestar (String codigo);
     
 }

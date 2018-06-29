@@ -16,4 +16,5 @@ public interface IPerfilDAO {
     public Perfil loginP (Usuario usu);
     public void agregar (Perfil perfil );
     public void modificar(Perfil perfil);
+    public Perfil buscarPerfil(String dni);
 }

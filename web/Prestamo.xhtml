@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:growl id="msj" sticky="true"/>
+                    <p:panel header="Prestamos">
+                        <h:panelGrid title="Prestamos" columns="2">
+                            <p:outputLabel value="Codigo de publicacion"/>
+                            <p:inputText value="#{publicacionFormBean.codigoDePublicacion}" />
+                            <p:commandButton value="Buscar" actionListener="#{publicacionFormBean.buscarPublicacionAprestar()}"
+                                             update="frmtbl,msj"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+                <h:form id="frmtbl">
+                    <p:dataTable id="tblp" var="pub" value="#{publicacionFormBean.publicacionAprestar}" rendered="#{publicacionFormBean.dialogo}">
+                          <p:column headerText="Titulo">  
+                              <p:outputLabel value="#{pub.publicacion.nombre}" />
+                            </p:column>
+                            <p:column headerText="Editorial">  
+                                <p:outputLabel value="#{pub.publicacion.editorial.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Resumen">  
+                                <p:outputLabel value="#{pub.publicacion.resumen}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo">  
+                                <p:outputLabel value="#{pub.publicacion.tipo}" />
+                            </p:column>
+
+                            <p:column headerText="Autor">  
+                                <p:outputLabel value="#{pub.autor.apellido} #{pub.autor.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Estado" rendered="#{loginFormBean.renderSuper}">   
+                                <p:outputLabel value="#{pub.publicacion.estado}" />
+                            </p:column>
+
+                            <p:column headerText="Stock" style="width: 30px">  
+                                <p:outputLabel value="#{pub.publicacion.stock}" />
+                            </p:column>
+
+                        <p:column headerText="Prestar" rendered="#{loginFormBean.renderAdmin}">  
+                            <p:commandButton value="Prestar" actionListener="#{prestamoFormBean.mostrarDialogo()}" 
+                                                 update="frmdlg"/>
+                            </p:column>
+                        </p:dataTable>
+                    
+                </h:form>
+                <h:form id="frmdlg" >
+                    <p:growl id="msjs" />
+                    <p:dialog id="dlg" header="Prestamo" widgetVar="wdlg" visible="#{prestamoFormBean.dialogo}">
+                        <p:panel header="Buscar usuario" >
+                        <p:outputLabel value="Ingrese dni :"/>
+                        <p:inputText value="#{prestamoFormBean.dni}"/>
+                        <p:commandButton value="Buscar" actionListener="#{prestamoFormBean.buscarPerfilAprestar()}"
+                                          update="frmdlg,msjs"/>
+                        </p:panel>
+                        <p:panel header="Datos del Prestamo" rendered="#{prestamoFormBean.dialogo2}">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Nombre : "/>
+                                <p:outputLabel value="#{prestamoFormBean.perfil.nombre}"/>
+                                <p:outputLabel value="Apellido : "/>
+                                <p:outputLabel value="#{prestamoFormBean.perfil.apellido}"/>
+                                <p:outputLabel value="Administrador : "/>
+                                <p:outputLabel value="#{loginFormBean.perfil.usuario.nombreUsuario}"/>
+                                
+                                <p:outputLabel value="Fecha de emision : "/>
+                                <p:outputLabel value="#{prestamoFormBean.prestamo.fechaPrestamo}"/>
+                                <p:outputLabel value="Turno de entrega : "/>
+                                <p:selectOneMenu value="#{prestamoFormBean.turno}">
+                                    <f:selectItem itemLabel="Mañana" itemValue="Mañana"/>
+                                    <f:selectItem itemLabel="Tarde" itemValue="Tarde"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Fecha de Entrega : "/>
+                                <p:outputLabel value="#{prestamoFormBean.fechaAdevolver}"/>
+                                <p:commandButton value="Confirmar Prestamo" actionListener="#{prestamoFormBean.altaDePrestamo()}"
+                                                 update="frmdlg,msjs"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
+                 <h:form id="frmdlg2">
+                     <p:dialog id="dlg" visible="#{prestamoFormBean.dialogo}">
+                        <p:panel header="Prestamo" >
+                            <p:outputLabel value="#{prestamoFormBean.perfil.nombre}"/>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

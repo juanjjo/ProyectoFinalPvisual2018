@@ -116,9 +116,27 @@ listaEncontrada.clear();
         return listaEncontrada;
     }
 
+    @Override
+    public List<PubAut> LibroAprestar(String codigo) {
+        Publicacion pub=new Publicacion();
+        List<PubAut> PublicacionAprestar= new ArrayList<>();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Criteria c =session.createCriteria(Publicacion.class).add(Restrictions.like("codigo", codigo));
+        if(!c.list().isEmpty()){
+        pub = (Publicacion)c.list().get(0);
+        
+       
+        Criteria criteria = session.createCriteria(PubAut.class).add(Restrictions.like("publicacion", pub));
+        PublicacionAprestar = criteria.addOrder(Order.asc("codigo")).list();
+        }
+        session.flush();//actuliseme ese opjeto de la base de dato
+        session.close();
+        return PublicacionAprestar;
+    }
+
   
-  
- 
 }
     
 

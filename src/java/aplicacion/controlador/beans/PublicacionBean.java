@@ -65,4 +65,8 @@ public class PublicacionBean implements Serializable {
         PublicacionDAOImp pubDAO = new PublicacionDAOImp();
         return pubDAO.buscarLibro(palabra);
     }
+public List<PubAut> buscarPublicacionAprestar(String codigo){
+    PublicacionDAOImp pubDAO=new PublicacionDAOImp();
+    return pubDAO.LibroAprestar(codigo);
+}
 }

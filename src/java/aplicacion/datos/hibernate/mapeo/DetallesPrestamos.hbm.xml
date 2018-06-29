@@ -25,7 +25,7 @@
       </column>
     </property>
     <property name="fechaDevolucion" type="date">
-      <column length="10" name="dp_fecha_devolucion" not-null="false"/>
+      <column length="10" name="dp_fecha_devolucion" />
     </property>
   </class>
 </hibernate-mapping>
