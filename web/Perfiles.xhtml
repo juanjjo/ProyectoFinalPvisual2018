@@ -11,6 +11,34 @@
             <ui:define name="content">
 
                 <h:form id="frmperfil">
+                    <script>
+                        PrimeFaces.locales['es'] = {
+                            closeText: 'Cerrar',
+                            prevText: 'Anterior',
+                            nextText: 'Siguiente',
+                            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                            weekHeader: 'Semana',
+                            firstDay: 1,
+                            isRTL: false,
+                            showMonthAfterYear: false,
+                            yearSuffix: '',
+                            timeOnlyTitle: 'Sólo hora',
+                            timeText: 'Tiempo',
+                            hourText: 'Hora',
+                            minuteText: 'Minuto',
+                            secondText: 'Segundo',
+                            currentText: 'Fecha actual',
+                            ampm: false,
+                            month: 'Mes',
+                            week: 'Semana',
+                            day: 'Día',
+                            allDayText: 'Todo el día'
+                        };
+                    </script> 
                     <p:panel>
                         <f:facet name="header">
                             Perfil
@@ -72,7 +100,10 @@
                                 <f:validateRegex  pattern="[0-9]+$" />
                             </p:inputText>
                             <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
-                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true"/>
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" size="10"
+                                        maxlength="10" pattern="dd-MM-YYYY"
+                                        mask="true" required="true"
+                                        locale="es"/>
 
                             <p:commandButton value="Guardar cambios" 
                                              actionListener="#{modificacionFormBean.modificarPerfil()}" update="mensaje,frmdialogo,frmperfil" />
