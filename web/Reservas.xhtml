@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./Estructura/MasterTemplate.xhtml">
+
+            <ui:define name="content">
+                  <h:form id="frmreservas">
+                      <p:panel header="Reservas">
+                        <p:dataTable id="tblp" var="reserva" value="#{reservaFormBean.reservas}">
+                            <p:column headerText="Nombre">  
+                                <p:outputLabel value="#{reserva.reserva.perfil.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Apellido">  
+                                <p:outputLabel value="#{reserva.reserva.perfil.apellido}" />
+                            </p:column>
+                            
+                           <p:column headerText="Publicaion">  
+                               <p:outputLabel value="#{reserva.publicacion.nombre}" />
+                            </p:column>
+                           <p:column headerText="Editorial">  
+                               <p:outputLabel value="#{reserva.publicacion.editorial.nombre}" />
+                            </p:column>
+                           <p:column headerText="Fecha de emision">  
+                               <p:outputLabel value="#{reserva.reserva.fechaEmision}" />
+                            </p:column>
+                           <p:column headerText="Fecha de turno">  
+                               <p:outputLabel value="#{reserva.reserva.fechaTurno}" />
+                            </p:column>
+                            <p:column headerText="Confirmar Reservas" rendered="#{loginFormBean.renderAdmin}">  
+                                <p:commandButton value="Modificar" actionListener="#{reservaFormBean.seleccionarReserva(reserva)}"
+                                                 update="frmD"/>
+                            </p:column>
+                             
+                        </p:dataTable>
+                   </p:panel>
+                </h:form>
+                <h:form id="frmD">
+                    <p:dialog header="Confirmar reserva" visible="#{reservaFormBean.dialogo}">
+                        <h:panelGrid columns="2">
+                            
+                            <p:outputLabel value="Nombre :"/>
+                            <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.perfil.nombre}"/>
+                            <p:outputLabel value="Apellido :"/>
+                            <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.reserva.perfil.apellido}"/>
+                            <p:outputLabel value="Titulo :"/>
+                            <p:outputLabel value="#{reservaFormBean.reservaSeleccionada.publicacion.nombre}"/>
+                            <p:commandButton value="Confirmar" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

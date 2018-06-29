@@ -47,7 +47,7 @@
                             <p:outputLabel id="lblemail" value="Email" for="txtemail"/>
                             <p:inputText id="txtemail" value="#{altaFormBean.perfil.email}"
                                          required="true" validatorMessage="Correo invalido">
-                                <f:validateRegex  pattern="[a-zA-Z0-9 ]+@[a-zA-Z]+.com" />
+                                <f:validateRegex  pattern="[--_a-z]+@[a-zA-Z]+.com"/> 
                             </p:inputText>
                             <p:outputLabel id="lbltelefono" value="Telefono" for="txttelefono"/>
                             <p:inputNumber id="txttelefono" value="#{altaFormBean.perfil.telefono}"
@@ -60,13 +60,16 @@
                                 <f:validateLength maximum="8"/>
                             </p:inputNumber>
                             <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
-                           
-                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" />
+
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true" />
 
                             <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilF()}" 
                                              update="msjs,Ufinal"/>
+
                         </h:panelGrid>
                     </p:panel>
+                    <br/>
+                    <p:button value="Cancelar" outcome="login.xhtml"/>
                 </h:form>
             </ui:define>
         </ui:composition>
