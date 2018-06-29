@@ -72,7 +72,7 @@
                                 <f:validateRegex  pattern="[0-9]+$" />
                             </p:inputText>
                             <p:outputLabel id="lblfecha" value="Fecha" for="txtfecha"/>
-                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" />
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true"/>
 
                             <p:commandButton value="Guardar cambios" 
                                              actionListener="#{modificacionFormBean.modificarPerfil()}" update="mensaje,frmdialogo,frmperfil" />

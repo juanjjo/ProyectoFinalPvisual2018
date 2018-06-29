@@ -10,9 +10,14 @@ import aplicacion.datos.hibernate.configuracion.NewHibernateUtil;
 import aplicacion.modelo.dominio.DetalleReserva;
 import aplicacion.modelo.dominio.Reserva;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -50,5 +55,21 @@ if(reserva!=null){
     session.close();
  }
     }
+
+    @Override
+    public List<DetalleReserva> listarReservas() {
+         List<DetalleReserva> listaReservas = new ArrayList<>();
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        //trae de la base datos todos los usuari final nada mas
+        Criteria criteria = session.createCriteria(DetalleReserva.class).add(Restrictions.like("estado",true));
+        listaReservas = criteria.addOrder(Order.asc("codigo")).list();
+
+        session.flush();//actuliseme ese opjeto de la base de dato
+        session.close();
+        return listaReservas;   
+    }
+
+    
     
 }

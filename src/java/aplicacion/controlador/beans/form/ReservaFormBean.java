@@ -8,6 +8,7 @@ package aplicacion.controlador.beans.form;
 import aplicacion.controlador.beans.ReservaBean;
 import aplicacion.modelo.dominio.DetalleReserva;
 import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.PubAut;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -16,6 +17,11 @@ import java.util.Date;
 import javax.faces.context.FacesContext;
 import aplicacion.modelo.dominio.Publicacion;
 import java.io.Serializable;
+
+
+
+import java.util.List;
+import javax.annotation.PostConstruct;
 
 /**
  *
@@ -32,6 +38,8 @@ public class ReservaFormBean implements Serializable {
     private boolean dialogo;
     private Publicacion publicacionSeleccionada;
 
+    private List<DetalleReserva> reservas;
+    private DetalleReserva reservaSeleccionada;
     /**
      * Creates a new instance of ReservaFormBean
      */
@@ -39,6 +47,7 @@ public class ReservaFormBean implements Serializable {
         publicacionSeleccionada = new Publicacion();
         reserva = new Reserva(new Date(), true);
         detalleReserva = new DetalleReserva();
+        reservaSeleccionada=new DetalleReserva();
     }
 
     public ReservaBean getReservaBean() {
@@ -81,14 +90,34 @@ public class ReservaFormBean implements Serializable {
         this.publicacionSeleccionada = publicacionSeleccionada;
     }
 
-    public void seleccionarPublicacion(Publicacion p) {
-        this.publicacionSeleccionada = p;
+    public DetalleReserva getReservaSeleccionada() {
+        return reservaSeleccionada;
+    }
+
+    public void setReservaSeleccionada(DetalleReserva reservaSeleccionada) {
+        this.reservaSeleccionada = reservaSeleccionada;
+    }
+
+    public void seleccionarPublicacion(PubAut p) {
+        this.publicacionSeleccionada = p.getPublicacion();
         mostrarDialogo();
     }
 
-    public void nuevaReserva() {
-        Perfil perf = (Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
+
+ 
+    public List<DetalleReserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<DetalleReserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    
+    public void nuevaReserva (){
+        Perfil perf=(Perfil) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("perfil");
         reserva.setPerfil(perf);
+
         reservaBean.altaDeReserva(reserva);
         detalleReserva.setPublicacion(publicacionSeleccionada);
         detalleReserva.setReserva(reserva);
@@ -108,4 +137,15 @@ public class ReservaFormBean implements Serializable {
     public void ocultarDialogo() {
         this.dialogo = false;
     }
+     public void listarReservas(){
+         this.reservas=reservaBean.listarReservas();
+     }
+     @PostConstruct
+     public void init(){
+         listarReservas();
+     }
+     public void seleccionarReserva(DetalleReserva r){
+         this.reservaSeleccionada=r;
+         mostrarDialogo();
+     }
 }

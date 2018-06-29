@@ -7,10 +7,10 @@
       <column name="drev_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicacion">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="join" name="publicacion" cascade="all">
       <column length="15" name="drev_publicacion" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Reserva" fetch="select" name="reserva">
+    <many-to-one class="aplicacion.modelo.dominio.Reserva" fetch="join" name="reserva" cascade="all">
       <column name="drev_reserva" not-null="true"/>
     </many-to-one>
     <property name="cantidad" type="int">

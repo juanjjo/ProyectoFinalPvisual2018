@@ -38,7 +38,7 @@ public class PublicacionBean implements Serializable {
         this.publicacion = publicacion;
     }
 
-    public List<Publicacion> obtenerPublicaciones() {
+    public List<PubAut> obtenerPublicaciones() {
         PublicacionDAOImp publicacionDao = new PublicacionDAOImp();
         return publicacionDao.obtenerLista();
     }

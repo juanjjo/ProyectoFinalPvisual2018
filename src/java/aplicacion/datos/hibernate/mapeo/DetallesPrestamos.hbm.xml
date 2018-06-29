@@ -2,30 +2,30 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/06/2018 19:00:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="convento" name="aplicacion.modelo.dominio.DetallesPrestamos" optimistic-lock="version" table="detalles_prestamos">
-    <id name="dpCodigo" type="java.lang.Integer">
+  <class catalog="convento" name="aplicacion.modelo.dominio.DetallePrestamo" optimistic-lock="version" table="detalles_prestamos">
+    <id name="codigo" type="java.lang.Integer">
       <column name="dp_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Prestamos" fetch="select" name="prestamos">
+    <many-to-one class="aplicacion.modelo.dominio.Prestamo" fetch="select" name="prestamo">
       <column name="dp_prestamo" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicaciones">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicacion">
       <column length="15" name="dp_publicacion" not-null="true"/>
     </many-to-one>
-    <property name="dpEstado" type="boolean">
+    <property name="estado" type="boolean">
       <column name="dp_estado" not-null="true"/>
     </property>
-    <property name="dpFechaADevolver" type="date">
+    <property name="fechaADevolver" type="date">
       <column length="10" name="dp_fecha_a_devolver" not-null="true"/>
     </property>
-    <property name="dpTurno" type="string">
+    <property name="turno" type="string">
       <column length="45" name="dp_turno" not-null="true">
         <comment>indica si se devuelve a la mañana o a la tarde {MAÑANA-TARDE}</comment>
       </column>
     </property>
-    <property name="dpFechaDevolucion" type="date">
-      <column length="10" name="dp_fecha_devolucion" not-null="true"/>
+    <property name="fechaDevolucion" type="date">
+      <column length="10" name="dp_fecha_devolucion" not-null="false"/>
     </property>
   </class>
 </hibernate-mapping>

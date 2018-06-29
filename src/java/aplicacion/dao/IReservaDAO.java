@@ -7,6 +7,7 @@ package aplicacion.dao;
 
 import aplicacion.modelo.dominio.DetalleReserva;
 import aplicacion.modelo.dominio.Reserva;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,5 @@ public interface IReservaDAO {
     public void altaReserva(Reserva reserva);
     public void modificarReserva(Reserva reserva);
     public void nuevoDetalleDeReserva(DetalleReserva detalle);
+    public List<DetalleReserva> listarReservas();
 }

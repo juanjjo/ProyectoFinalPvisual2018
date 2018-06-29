@@ -31,7 +31,7 @@ public class PublicacionFormBean implements Serializable {
 
     @ManagedProperty(value = "#{publicacionBean}")
     private PublicacionBean publicacionBean;
-    private List<Publicacion> publicaciones;
+    private List<PubAut> publicaciones;
     private Publicacion publicacion;
     private Editorial editorial;
     private Autor autor;
@@ -62,11 +62,11 @@ public class PublicacionFormBean implements Serializable {
         this.publicacionBean = publicacionBean;
     }
 
-    public List<Publicacion> getPublicaciones() {
+    public List<PubAut> getPublicaciones() {
         return publicaciones;
     }
 
-    public void setPublicaciones(List<Publicacion> publicaciones) {
+    public void setPublicaciones(List<PubAut> publicaciones) {
         this.publicaciones = publicaciones;
     }
 
@@ -165,10 +165,10 @@ public class PublicacionFormBean implements Serializable {
             publicacionAutor = new PubAut();
             libroSeleccionado = new Publicacion();
         } catch (Exception e) {
-            {
+            
                 FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error Codigo de libro ya existe", "Error Codigo de libro ya existe");
                 FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-            }
+            
         }
     }
 
@@ -180,8 +180,8 @@ public class PublicacionFormBean implements Serializable {
         this.dialogo = false;
     }
 
-    public void seleccionarLibro(Publicacion p) {
-        this.libroSeleccionado = p;
+    public void seleccionarLibro(PubAut p) {
+        this.libroSeleccionado = p.getPublicacion();
         mostrarDialogo();
     }
 

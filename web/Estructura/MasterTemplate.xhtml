@@ -24,16 +24,19 @@
                         <p:menuitem value="Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderFinal}" outcome="Libros"/>
                         <p:menuitem value="Editar Libros y revistas" icon="ui-icon-books" rendered="#{loginFormBean.renderAdmin}" outcome="Libros"/>
                     </p:submenu>
+
                     <p:submenu label="Reservas">
-                        <p:menuitem value="Mis reservas" rendered="#{loginFormBean.renderFinal}"/>
-                        <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}"/>
+                        <p:menuitem value="Mis reservas" rendered="#{loginFormBean.renderFinal}" outcome="Reservas.xhtml"/>
+                        <p:menuitem value="Ver y Confirmar" rendered="#{loginFormBean.renderAdmin}" outcome="Reservas.xhtml"/>
                     </p:submenu>
+                    
                     <p:submenu label="Autores y Editoriales">
-                        <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
-                        <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>
-                        <p:menuitem value="Ver y Editar Autores" rendered="#{loginFormBean.renderAdmin}" outcome="Autores.xhtml"/>
-                        <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
-                    </p:submenu>
+                         <p:menuitem value="Lista de Autores" rendered="#{loginFormBean.renderFinal}" outcome="Autores.xhtml"/>
+                         <p:menuitem value="Lista de Editoriales" rendered="#{loginFormBean.renderFinal}" outcome="Editoriales.xhtml"/>
+                            <p:menuitem value="Ver y Editar Autores" rendered="#{loginFormBean.renderAdmin}" outcome="Autores.xhtml"/>
+                            <p:menuitem value="Ver y Editar Editoriales" rendered="#{loginFormBean.renderAdmin}" outcome="Editoriales.xhtml"/>
+                     </p:submenu>
+                    
                     <p:submenu label="Empleados"  rendered="#{loginFormBean.renderSuper}">
                         <p:menuitem value="Ver y Editar" outcome="Administradores.xhtml"  />                        
                     </p:submenu>

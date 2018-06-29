@@ -14,7 +14,7 @@ import java.util.List;
  * @author Gabriel.Y
  */
 public interface IPublicacionDAO {
-    public List<Publicacion> obtenerLista();
+    public List<PubAut> obtenerLista();
     public void filtrarPublicacion();
     public void nuevaPublicaion(Publicacion p);
     public void nuevaPublicaionAutor (PubAut publicacionAutor);

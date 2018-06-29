@@ -12,6 +12,10 @@ import aplicacion.dao.imp.ram.ReservaDAOImp;
 import aplicacion.modelo.dominio.DetalleReserva;
 import java.io.Serializable;
 
+
+
+import java.util.List;
+
 /**
  *
  * @author Gabriel.Y
@@ -45,5 +49,12 @@ public class ReservaBean implements Serializable {
         ReservaDAOImp reservaDAO = new ReservaDAOImp();
         reservaDAO.nuevoDetalleDeReserva(dr);
     }
+
+
+
+   public List<DetalleReserva> listarReservas(){
+       ReservaDAOImp reservaDAO=new ReservaDAOImp();
+       return reservaDAO.listarReservas();
+   } 
 
 }

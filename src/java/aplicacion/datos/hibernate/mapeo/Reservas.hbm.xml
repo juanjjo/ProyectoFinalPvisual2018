@@ -7,7 +7,7 @@
       <column name="rev_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="select" name="perfil">
+    <many-to-one class="aplicacion.modelo.dominio.Perfil" fetch="join" name="perfil" cascade="all">
       <column name="rev_perfil" not-null="true"/>
     </many-to-one>
     <property name="fechaEmision" type="date">

@@ -7,10 +7,10 @@
       <column name="pa_codigo"/>
       <generator class="identity"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Autor" fetch="select" name="autor">
+    <many-to-one class="aplicacion.modelo.dominio.Autor" fetch="join" name="autor" cascade="all">
       <column name="pa_autor" not-null="true"/>
     </many-to-one>
-    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="select" name="publicacion">
+    <many-to-one class="aplicacion.modelo.dominio.Publicacion" fetch="join" name="publicacion" cascade="all" >
       <column length="15" name="pa_ublicacion" not-null="true"/>
     </many-to-one>
     <property name="paEstado" type="boolean">

@@ -13,36 +13,36 @@
                     <p:panel >
                         <p:dataTable id="tblp" var="pub" value="#{publicacionFormBean.publicaciones}">
                             <p:column headerText="Editorial">  
-                                <p:outputLabel value="#{pub.editorial.nombre}" />
+                                <p:outputLabel value="#{pub.publicacion.editorial.nombre}" />
                             </p:column>
 
                             <p:column headerText="Nombre">  
-                                <p:outputLabel value="#{pub.nombre}" />
+                                <p:outputLabel value="#{pub.publicacion.nombre}" />
                             </p:column>
 
                             <p:column headerText="Resumen">  
-                                <p:outputLabel value="#{pub.resumen}" />
+                                <p:outputLabel value="#{pub.publicacion.resumen}" />
                             </p:column>
 
                             <p:column headerText="Tipo">  
-                                <p:outputLabel value="#{pub.tipo}" />
+                                <p:outputLabel value="#{pub.publicacion.tipo}" />
                             </p:column>
 
-                            <p:column headerText="Resumen">  
-                                <p:outputLabel value="#{pub.resumen}" />
+                            <p:column headerText="Autor">  
+                                <p:outputLabel value="#{pub.autor.apellido} #{pub.autor.nombre}" />
                             </p:column>
 
                             <p:column headerText="Estado" rendered="#{loginFormBean.renderSuper}">   
-                                <p:outputLabel value="#{pub.estado}" />
+                                <p:outputLabel value="#{pub.publicacion.estado}" />
                             </p:column>
 
                             <p:column headerText="Stock" style="width: 30px">  
-                                <p:outputLabel value="#{pub.stock}" />
+                                <p:outputLabel value="#{pub.publicacion.stock}" />
                             </p:column>
 
                             <p:column headerText="Reservas" rendered="#{loginFormBean.renderFinal}">  
                                 <p:commandButton value="Reservar Libro" 
-                                                 actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserva"/>
+                                                 actionListener="#{reservaFormBean.seleccionarPublicacion(pub)}" update="frmDialogoReserv"/>
                             </p:column>
                             <p:column headerText="Editar" rendered="#{loginFormBean.renderAdmin}">  
                                 <p:commandButton value="Editar libro" actionListener="#{publicacionFormBean.seleccionarLibro(pub)}"
@@ -142,13 +142,14 @@
                     </p:dialog>
                 </h:form>
 
-                <h:form id="frmDialogoReserva">
+                <h:form id="frmDialogoReserv">
                     <p:growl id="msj" />
                     <p:dialog header="Nueva reserva" visible="#{reservaFormBean.dialogo}" showEffect="explode" hideEffect="explode" modal="true"
                               footer="Biblioteca San Francisco-Programacion visual 2018">
                         <h:panelGrid columns="2">
                             <p:outputLabel value="Nombre :"/>
                             <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.nombre}"/>
+
                             <p:outputLabel value="Editorial :"/>
                             <p:outputLabel value="#{reservaFormBean.publicacionSeleccionada.editorial.nombre}"/>
                             <p:outputLabel value="Usuario :" />
@@ -157,15 +158,15 @@
                             <p:outputLabel value="#{reservaFormBean.reserva.fechaEmision}">
                                 <f:convertDateTime type="date"/>
                             </p:outputLabel>
-                            <p:outputLabel id="lblfechaturno" value="Fecha de turno" for="txtfechaturno" />
-                            <p:inputText id="txtfechaturno" value="#{reservaFormBean.reserva.fechaTurno}" required="true">
-                                <f:convertDateTime type="date" /> 
-                            </p:inputText>
-                            <p:outputLabel id="lblcantidad" value="Cantidad" for="txtcantidad"/>
-                            <p:inputNumber id="txtcantidad" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
+                            <p:outputLabel id="lblfechaturn" value="Fecha de turno" for="txtfechaturn" />
+                            <p:calendar id="txtfechaturn" value="#{reservaFormBean.reserva.fechaTurno}" pattern="dd-MM-yyyy" mask="true" required="true" />
+                            <p:outputLabel id="lblcantida" value="Cantidad" for="txtcantida"/>
+                            <p:inputNumber id="txtcantida" value="#{reservaFormBean.detalleReserva.cantidad}" decimalPlaces="0" 
                                            required="true"/>
+
+                           
                             <p:commandButton value="Reservar" actionListener="#{reservaFormBean.nuevaReserva()}"
-                                             update="frmDialogoReserva,msj"/>
+                                             update="frmDialogoReserv,msj"/>
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>

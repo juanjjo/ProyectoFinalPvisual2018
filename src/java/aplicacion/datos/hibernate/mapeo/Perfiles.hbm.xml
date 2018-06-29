@@ -41,7 +41,7 @@
       <key>
         <column name="pre_socio" not-null="true"/>
       </key>
-      <one-to-many class="aplicacion.modelo.dominio.Prestamos"/>
+      <one-to-many class="aplicacion.modelo.dominio.Prestamo"/>
     </set>
   </class>
 </hibernate-mapping>

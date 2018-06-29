@@ -43,7 +43,7 @@
       <key>
         <column length="15" name="dp_publicacion" not-null="true"/>
       </key>
-      <one-to-many class="aplicacion.modelo.dominio.DetallesPrestamos"/>
+      <one-to-many class="aplicacion.modelo.dominio.DetallePrestamo"/>
     </set>
     <set fetch="select" inverse="true" lazy="true" name="pubAuts" table="pub_aut">
       <key>

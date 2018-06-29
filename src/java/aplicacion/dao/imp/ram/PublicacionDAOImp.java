@@ -27,12 +27,12 @@ import javax.faces.context.FacesContext;
 public class PublicacionDAOImp implements IPublicacionDAO ,Serializable{
 
     @Override
-    public List<Publicacion> obtenerLista() {
-     List<Publicacion> listaPublicaciones = new ArrayList<>();
+    public List<PubAut> obtenerLista() {
+     List<PubAut> listaPublicaciones = new ArrayList<>();
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         //trae de la base datos todos los usuari final nada mas
-        Criteria criteria = session.createCriteria(Publicacion.class);
+        Criteria criteria = session.createCriteria(PubAut.class);
         listaPublicaciones = criteria.addOrder(Order.asc("codigo")).list();
 
         session.flush();//actuliseme ese opjeto de la base de dato
