@@ -61,7 +61,8 @@
                             </p:inputNumber>
                             <p:outputLabel id="lblfecha" value="Fecha De Naciemiento" for="txtfecha"/>
 
-                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true" />
+                            <p:calendar id="txtfecha" value="#{loginFormBean.perfil.fechaNac}" pattern="dd-MM-yyyy" mask="true" required="true" 
+                                        locale="es"/>
 
                             <p:commandButton value="Registrarse" actionListener="#{altaFormBean.agregarPerfilF()}" 
                                              update="msjs,Ufinal"/>
